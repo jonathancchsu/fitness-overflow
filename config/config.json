@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "fitness_overflow_app",
+    "password": "potatogainz",
+    "database": "fitness_overflow",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "seederStorage": "sequelize"
+  },
+  "test": {
+    "username": "fitness_overflow_app",
+    "password": "potatogainz",
+    "database": "fitness_overflow",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "seederStorage": "sequelize"
+  },
+  "production": {
+    "username": "fitness_overflow_app",
+    "password": "potatogainz",
+    "database": "fitness_overflow",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "seederStorage": "sequelize"
+  }
+}
