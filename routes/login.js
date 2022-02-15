@@ -16,12 +16,44 @@ const loginValidations = [
 ]
 
 router.get('/', csrfProtection, function (req, res, next) {
-    res.render('login', { 
+    res.render('login', {
      title: 'Login',
      csrfToken: req.csrfToken()
-    })
+    });
+});
 
-    
-})
+router.post('/', csrfProtection, loginValidations,
+    asyncHandler(async (req, res) => {
+    const {
+        email,
+        password,
+    } = req.body;
+
+    let errors = [];
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+        const user = await db.User.findOne({ where: { email } });
+
+        if (user !== null) {
+            const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+
+            if (passwordMatch) {
+                loginUser(req, res, user);
+                return res.redirect('/');
+            }
+        }
+        errors.push('Cannot find a valid user with the provided email and passwords.');
+    } else {
+        errors = validatorErrors.array().map((error) => error.msg);
+    }
+
+    res.render('login', {
+        title: 'Login',
+        email,
+        errors,
+        csrfToken: req.csrfToken(),
+    });
+}));
 
 module.exports = router;
