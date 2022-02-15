@@ -1,0 +1,20 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  +validationErrors(errors)
+  .signup
+    div.signup-form
+      h2#h2 Signup
+      form(action='/sign-up' class='signup-form-field' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        div.signup-username
+          +field('Username', 'username', username)
+        div.signup-email
+          +field('Email', 'email', email, 'email')
+        div.signup-password
+          +field('Password', 'password', '', 'password')
+        div.signup-confirmPassword
+          +field('Confirm password', 'confirmPassword', '', 'password')
+        button(type='submit') Sign up

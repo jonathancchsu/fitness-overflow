@@ -6,10 +6,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 
 router.get('/', csrfProtection, (req, res) => {
-    const user = db.User.build();
+    //const user = await db.User.build();
     res.render('sign-up', {
       title: 'Sign-up',
-      user,
       csrfToken: req.csrfToken(),
     });
   });
@@ -61,9 +60,10 @@ router.get('/', csrfProtection, (req, res) => {
       password,
     } = req.body;
 
+    
     const user = db.User.build({
       email,
-      username,
+      username
     });
 
     const validatorErrors = validationResult(req);
