@@ -1,4 +1,4 @@
-const { User } = require('./db/models');
+const db = require('./db/models');
 
 const loginUser = (req, user) => {
     req.session.auth = { userId: user.id};
@@ -16,26 +16,26 @@ const restoreUser = async (req, res, next) => {
         const { userId } = req.session.auth;
 
         try {
-            const user = await User.findByPk(userId);
+            const user = await db.User.findByPk(userId);
 
             if(user){
-                res.locals.verified = true;
+                res.locals.authenticated = true;
                 res.locals.user = user;
                 next();
             }
         }
         catch (err) {
-            res.locals.verified = false;
+            res.locals.authenticated = false;
             next(err);
         }
         } else {
-         res.locals.verified = false;
+         res.locals.authenticated = false;
         next();
     }
-}   
+}
 
 const requireAuth = (req, res, next) => {
-    if(!res.locals.verified) {
+    if(!res.locals.authenticated) {
         return res.redirect('./login')
     }
 
