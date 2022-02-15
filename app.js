@@ -34,7 +34,7 @@ app.use(
     saveUninitialized: false,
     resave: false,
   })
-  );
+);
 
 // create Session table if it doesn't already exist
 store.sync();
