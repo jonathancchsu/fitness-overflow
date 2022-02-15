@@ -4,6 +4,7 @@ const db = require('../db/models');
 const { asyncHandler, csrfProtection } = require('./utils');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const { loginUser } = require('../auth')
 
 router.get('/', csrfProtection, (req, res) => {
     const user = db.User.build();
