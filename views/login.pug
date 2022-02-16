@@ -1,8 +1,16 @@
 extends layout.pug
 
-append head
-    link(rel='stylesheet' href='/stylesheets/login.css')
+include utils.pug 
 
 block content
-    .nav-bar
-     h1.fitness-overflow-text Fitness-Overflow
+    +validationErrors(errors)
+    #login-page
+    div#login-form
+      h2#h2 Login
+      form(action='/login' id='login-form-field' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        div#login-email
+          +field('Email', 'email', email, 'email')
+        div#login-password
+          +field('Password', 'password', '', 'password')
+        button(type='submit' class='submit-login-info') Login
