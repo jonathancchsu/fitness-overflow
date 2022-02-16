@@ -1,9 +1,18 @@
 doctype html
 html
   head
-      block head
+      block content
         title="Fitness-Overflow"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         h1 GET SWOLE
   body
-    block content
+      block navBar
+          li: a(href="/") Home
+          li: a(href="/users") Users
+          li: a(href="/questions") Questions
+          li: a(href="/sign-up") Sign Up
+          li: a(href="/login") Log In
+          li: a(href="/logout") Log Out
+              footer
+                  p hi
+
