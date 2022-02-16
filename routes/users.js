@@ -1,20 +1,33 @@
 var express = require('express');
-const { asyncHandler, csrfProtection } = require('./utils');
+const { asyncHandler, csrfProtection, getDate } = require('./utils');
 const db = require('../db/models');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/:id', asyncHandler(async function(req, res, next) {
-  const userId = req.params.id;
-  const user = await db.User.findByPk(userId);
 
-  if (user) {
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/');
+});
 
-  } else {
+router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+  const questionDate = getDate;
+  const userId = parseInt(req.params.id, 10);
+  console.log(userId)
+  const questions = await db.Question.findAll({
+    include: [db.User],
+    where: {
+      userId
+    },
+    order: [['updatedAt', 'DESC']]
+  });
+  const user = db.User.username
 
-  }
-  
-  res.send('respond with a resource');
+  res.render('profile-page', {
+    user,
+    questions,
+    questionDate
+  })
+
 }));
-
 module.exports = router;
