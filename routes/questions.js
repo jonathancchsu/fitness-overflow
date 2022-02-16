@@ -42,83 +42,88 @@ const validateQuestion = [
   handleValidationErrors,
 ];
 
+// router.get(
+//   '/:id',
+//   asyncHandler(async (req, res, next) => {
+//     const question = await Question.findOne({
+//       where: {
+//         id: req.params.id,
+//       },
+//     })
+//     if (question) {
+//       res.json({ question });
+//     } else {
+//       next(questionNotFoundError(req.params.id));
+//     }
+//   })
+// );
+
+// router.post(
+//   "/",
+//   csrfProtection,
+//   validateQuestion,
+//   asyncHandler(async (req, res) => {
+//     const { title, body } = req.body;
+//     const question = await Question.create({ title, body, userId: req.user.id });
+//     res.json({ question });
+//   })
+// );
+
+// router.put(
+//   "/:id",
+//   csrfProtection,
+//   validateQuestion,
+//   asyncHandler(async (req, res, next) => {
+//     const question = await Question.findOne({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     if (req.user.id !== question.userId) {
+//       const err = new Error("Unauthorized");
+//       err.status = 401;
+//       err.message = "You do not have the right to edit this question.";
+//       err.title = "Unauthorized";
+//       throw err;
+//     }
+//     if (question) {
+//       await question.update({ body: req.body.body });
+//       res.json({ question });
+//     } else {
+//       next(questionNotFoundError(req.params.id));
+//     }
+//   })
+// );
+
+// router.delete(
+//   "/:id",
+//   asyncHandler(async (req, res, next) => {
+//     const question = await Question.findOne({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     if (req.user.id !== question.userId) {
+//       const err = new Error("Unauthorized");
+//       err.status = 401;
+//       err.message = "You do not have the right to edit this question.";
+//       err.title = "Unauthorized";
+//       throw err;
+//     }
+//     if (question) {
+//       await question.destroy();
+//       res.json({ message: `Deleted question with id of ${req.params.id}.` });
+//     } else {
+//       next(questionNotFoundError(req.params.id));
+//     }
+//   })
+// );
+
 router.get(
-  '/:id',
-  asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
-    })
-    if (question) {
-      res.json({ question });
-    } else {
-      next(questionNotFoundError(req.params.id));
-    }
-  })
-);
-
-router.post(
-  "/",
-  csrfProtection,
-  validateQuestion,
-  asyncHandler(async (req, res) => {
-    const { title, body } = req.body;
-    const question = await Question.create({ title, body, userId: req.user.id });
-    res.json({ question });
-  })
-);
-
-router.put(
-  "/:id",
-  csrfProtection,
-  validateQuestion,
-  asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (req.user.id !== question.userId) {
-      const err = new Error("Unauthorized");
-      err.status = 401;
-      err.message = "You do not have the right to edit this question.";
-      err.title = "Unauthorized";
-      throw err;
-    }
-    if (question) {
-      await question.update({ body: req.body.body });
-      res.json({ question });
-    } else {
-      next(questionNotFoundError(req.params.id));
-    }
-  })
-);
-
-router.delete(
-  "/:id",
-  asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (req.user.id !== question.userId) {
-      const err = new Error("Unauthorized");
-      err.status = 401;
-      err.message = "You do not have the right to edit this question.";
-      err.title = "Unauthorized";
-      throw err;
-    }
-    if (question) {
-      await question.destroy();
-      res.json({ message: `Deleted question with id of ${req.params.id}.` });
-    } else {
-      next(questionNotFoundError(req.params.id));
-    }
-  })
-);
-
-
+  "/new",
+  (req, res) => {
+    res.render('new-question');
+  }
+)
 
 module.exports = router;
