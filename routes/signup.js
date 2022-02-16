@@ -8,7 +8,7 @@ const { loginUser } = require('../auth')
 
 router.get('/', csrfProtection, (req, res) => {
     const user = db.User.build();
-    res.render('sign-up', {
+    res.render('sign-up.pug', {
       title: 'Sign-up',
       user,
       csrfToken: req.csrfToken(),
@@ -77,7 +77,7 @@ router.get('/', csrfProtection, (req, res) => {
       res.redirect('/');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('sign-up', {
+      res.render('sign-up.pug', {
         title: 'Sign-up',
         user,
         errors,
