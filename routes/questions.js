@@ -39,7 +39,7 @@ const validateQuestion = [
   check("title")
     .isLength({ max: 300 })
     .withMessage("Question title cannot be over 300 characters"),
-  handleValidationErrors,
+  // handleValidationErrors,
 ];
 
 router.get(
