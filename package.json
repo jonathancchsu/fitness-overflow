@@ -28,5 +28,18 @@
     "dotenv": "^8.2.0",
     "dotenv-cli": "^4.0.0",
     "nodemon": "^2.0.6"
-  }
+  },
+  "description": "",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathancchsu/fitness-overflow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathancchsu/fitness-overflow/issues"
+  },
+  "homepage": "https://github.com/jonathancchsu/fitness-overflow#readme"
 }
