@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const sign_upRouter = require('./routes/signup');
-const questionsRouter = reuqire('./routes/questions');
+const questionsRouter = require('./routes/questions');
 const { restoreUser } = require('./auth.js');
 
 
