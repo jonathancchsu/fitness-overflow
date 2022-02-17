@@ -1,6 +1,6 @@
 const express = require('express');
 const { check } = require("express-validator");
-const { asyncHandler, csrfProtection, handleValidationErrors } = require('./utils');
+const { asyncHandler, csrfProtection, handleValidationErrors, getDate } = require('./utils');
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
@@ -13,7 +13,7 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     const questions = await Question.findAll({
-      include: [{ model: User, as: "user", attributes: ["username"]}],
+      include: [{ model: User, as: "user", attributes: ["username"] }],
       order: [["createdAt", "DESC"]],
       attributes: ["title", "body"]
     })
@@ -45,13 +45,30 @@ const validateQuestion = [
 router.get(
   '/:id',
   asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
-    })
+    const userId = req.session.auth.userId
+    const questionDate = getDate;
+    const questionId = parseInt(req.params.id, 10);
+    const question = await db.Question.findByPk(questionId, {
+      include: [db.User],
+    });
+    // const answers = await db.Answer.findAll({
+    //     where: {
+    //       questionId
+    //     },
+    //   include: [db.User],
+    //   order: [['updatedAt', 'DESC']]
+    // });
+    // console.log(`\n\n\n\n\n ${answers} \n\n\n\n\n`)
+
     if (question) {
-      res.json({ question });
+      res.render('specific-question', {
+        user: req.session.auth.userId,
+        // answers,
+        question,
+        userId,
+        questionDate
+
+      });
     } else {
       next(questionNotFoundError(req.params.id));
     }
@@ -95,8 +112,8 @@ router.put(
   })
 );
 
-router.delete(
-  "/:id",
+router.post(
+  "/:id/delete",
   asyncHandler(async (req, res, next) => {
     const question = await Question.findOne({
       where: {
