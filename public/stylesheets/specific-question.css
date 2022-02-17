@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 15px #3D405B;
+    height: 74px;
 }
 
 .nav-display-left {
@@ -65,7 +66,7 @@ h1 {
 }
 
 .post-block {
-    border-bottom: 1px solid #3D405B;
+    box-shadow: inset 0px 0px 15px #3D405B;
 }
 
 .upper-question-block {
@@ -75,7 +76,8 @@ h1 {
     margin-right: 20%;
 }
 
-.profile-img-2 {
+.profile-img-2,
+.profile-img-3 {
     height: 30px;
     width: 30px;
 }
@@ -131,8 +133,66 @@ h1 {
     color: black;
 }
 
+.delete-button:hover,
+.edit-button:hover {
+    box-shadow: 0px 2px 5px #3D405B;
+}
+
 .edit-text,
 .delete-text {
     display:block;
     text-decoration: none;
+}
+
+.submit-answer-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer-block {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.answer-text-area {
+    margin-top: 30px;
+    min-width: 100%;
+    min-height: 80px;
+}
+
+.answer-submit-button {
+    border-radius: 25px;
+    margin-bottom: 20px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: #F2CC8F;
+    color: black;
+}
+
+.answer-contents {
+    border-bottom: 1px solid #3D405B;
+}
+
+.answers-title {
+    margin-top: 20px;
+}
+
+.answers-text {
+    font-weight: bold;
+}
+
+.footer {
+    border-top: 1px solid #3D405B;
+    margin-top: 30px;
+    height: 74px;
+    background-color: #E07A5F;
+}
+
+.logo-img-lower {
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
 }
