@@ -4,13 +4,17 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 0px 15px #3D405B;
-
 }
 
 .nav-display-left {
   display: flex;
   align-items: center;
   margin-left: 10%;
+}
+
+.dumbbell-img {
+  height: 70px;
+  width: 70px;
 }
 
 p {
