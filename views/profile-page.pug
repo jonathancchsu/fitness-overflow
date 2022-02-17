@@ -15,10 +15,14 @@ block content
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
     .total-content
         .content
-            .your-questions
-                div.title
-                    h2.your-post-title Your Questions:
-
+            if locals.user.id === userId
+                .your-questions
+                    div.title
+                        h2.your-post-title Your Questions:
+            else
+                .your-questions
+                        div.title
+                            h2.your-post-title Their Questions
             each question in questions
                 .each-post-block
                     div.post-user
