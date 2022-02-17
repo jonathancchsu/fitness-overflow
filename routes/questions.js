@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection, handleValidationErrors, getDate } = requir
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
+const {Answer} = db
 
 const { Question, User } = db;
 
@@ -42,6 +43,13 @@ const validateQuestion = [
   handleValidationErrors,
 ];
 
+const validateAnswer = [
+  check("body")
+    .exists({ checkFalsy: true })
+    .withMessage("Answers cannot be empty"),
+  handleValidationErrors,
+];
+
 
 router.get(
   '/:id',
@@ -52,19 +60,18 @@ router.get(
     const question = await db.Question.findByPk(questionId, {
       include: [db.User],
     });
-    // const answers = await db.Answer.findAll({
-    //     where: {
-    //       questionId
-    //     },
-    //   include: [db.User],
-    //   order: [['updatedAt', 'DESC']]
-    // });
-    // console.log(`\n\n\n\n\n ${answers} \n\n\n\n\n`)
+    const answers = await db.Answer.findAll({
+        where: {
+          questionId
+        },
+      include: [db.User],
+      order: [['createdAt', 'DESC']]
+    });
 
     if (question) {
       res.render('specific-question', {
         user: req.session.auth.userId,
-        // answers,
+        answers,
         question,
         userId,
         questionDate
