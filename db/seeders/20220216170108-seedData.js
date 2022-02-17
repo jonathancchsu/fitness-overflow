@@ -32,6 +32,9 @@ module.exports = {
 
     const answers = await queryInterface.bulkInsert('Answers', [
             { body: 'Eggs can be bad if you have high cholesterol. Eat in moderation boy/girl!', userId: 2, questionId: 1},
+            { body: 'Eggs are lowkey nasty', userId: 4, questionId: 1},
+            { body: 'I usually just eat the egg whites, but I have them quite often, so far so good!', userId: 3, questionId: 1},
+            { body: 'Turns out I have high cholesterol', userId: 2, questionId: 1},
             { body: 'Does not matter! Whenever you feel energized I say go for it!', userId: 1, questionId: 2},
             { body: 'Are you seriously asking this? Some do and some do not. Just put the work in and you should be fine.', userId: 1, questionId: 3},
             { body: 'I try to run in a area with nice scenery so I can enjoy running!', userId: 2, questionId: 4},
@@ -52,7 +55,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-  
+
         await queryInterface.bulkDelete('Answers', null, {});
         await queryInterface.bulkDelete('Questions', null, {});
         await queryInterface.bulkDelete('Categories', null, {});
