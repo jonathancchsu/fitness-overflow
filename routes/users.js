@@ -22,11 +22,14 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     },
     order: [['updatedAt', 'DESC']]
   });
+  const username = questions[0].User.username
+  console.log(username)
   res.render('profile-page', {
     user,
     questions,
     questionDate,
-    userId
+    userId,
+    username
   })
 
 

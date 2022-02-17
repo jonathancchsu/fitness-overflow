@@ -165,6 +165,7 @@ h1 {
 }
 
 .answer-submit-button {
+    cursor: pointer;
     border-radius: 25px;
     margin-bottom: 20px;
     height: 25px;
