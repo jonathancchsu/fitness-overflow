@@ -42,6 +42,12 @@ const validateQuestion = [
   handleValidationErrors,
 ];
 
+router.get(
+  "/new",
+  (req, res) => {
+    res.render('new-question');
+  }
+)
 
 router.get(
   '/:id',
@@ -52,14 +58,13 @@ router.get(
     const question = await db.Question.findByPk(questionId, {
       include: [db.User],
     });
-    // const answers = await db.Answer.findAll({
-    //     where: {
-    //       questionId
-    //     },
-    //   include: [db.User],
-    //   order: [['updatedAt', 'DESC']]
-    // });
-    // console.log(`\n\n\n\n\n ${answers} \n\n\n\n\n`)
+    const answers = await db.Answer.findAll({
+        where: {
+          questionId
+        },
+      include: [db.User],
+      order: [['updatedAt', 'DESC']]
+    });
 
     if (question) {
       res.render('specific-question', {
@@ -137,11 +142,6 @@ router.post(
 //   })
 // );
 
-router.get(
-  "/new",
-  (req, res) => {
-    res.render('new-question');
-  }
-)
+
 
 module.exports = router;

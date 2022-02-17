@@ -1,10 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Answer = sequelize.define('Answer', {
-    title: {
-      allowNull: false,
-      type: DataTypes.STRING(300)
-    },
     body: {
       allowNull: false,
       type: DataTypes.TEXT
