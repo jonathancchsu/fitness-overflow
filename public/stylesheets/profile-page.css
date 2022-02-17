@@ -46,7 +46,8 @@ p {
     cursor: pointer;
 }
 
-.logout-button {
+.logout-button,
+.log-in-button {
     border-radius: 10px;
     height: 25px;
     width: 70px;
@@ -55,7 +56,9 @@ p {
     color: #F4F1DE;
 }
 
-.logout-button:hover {
+
+.logout-button:hover,
+.log-in-button:hover {
     cursor: pointer;
 }
 

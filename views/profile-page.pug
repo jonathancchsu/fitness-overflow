@@ -10,8 +10,11 @@ block content
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
             a(href='/' class="fitness-font") Fitness-Overflow
         div.nav-display-right
-            form(action="/logout" method="post")
-                button(type='submit' class='logout-button') Log-Out
+            if locals.authenticated
+                form(action="/logout" method="post")
+                    button(type='submit' class='logout-button') Log-Out
+            else
+                a(href='/' class='log-in-link'): button(type='button' class='log-in-button') Log-In
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
     .total-content
         .content
