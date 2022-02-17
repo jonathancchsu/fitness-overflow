@@ -1,4 +1,5 @@
 const express = require('express');
+const createError = require('http-errors');
 const { asyncHandler, csrfProtection, getDate } = require('./utils');
 const db = require('../db/models');
 const router = express.Router();
@@ -13,7 +14,6 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     const userId = parseInt(req.params.id, 10);
     console.log(userId);
     console.log(res.locals.user.id);
-    if(res.locals.user.id === userId){
   const questionDate = getDate;
   const questions = await db.Question.findAll({
     include: [db.User],
@@ -24,15 +24,16 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   });
   res.render('profile-page', {
     questions,
-    questionDate
+    questionDate,
+    userId
   })}
   else {
-    
-    res.redirect('/');
-  }}
-  else{
+    res.render('/auth-error.pug')
     res.redirect('/');
   }
+  // else{
+  //   res.redirect('/');
+  // }
 
 
 router.post('/logout', (req, res) => {
