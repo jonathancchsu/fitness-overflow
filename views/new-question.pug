@@ -24,8 +24,12 @@ block content
         h2#h2 New Question
         form(action='/questions/new' id='new-question-form-field' method='post')
           input(type='hidden' name ='_csrf' value=csrfToken)
+          div#categories-drop-down Category:
+            select#category(name="categoryId")
+              each category in categoryArr
+                option(value=category.id) #{category.name}
           div#title Title:
             textarea(name="title", for="title", value="title", cols="30", rows="5")
-          div#body Question: 
+          div#body Question:
             textarea(name="body", for="body", value="body", cols="30", rows="20")
           button(type='submit' class='post-button') Post Question

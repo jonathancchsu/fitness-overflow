@@ -1,6 +1,6 @@
 const express = require('express');
-const { check } = require("express-validator");
-const { asyncHandler, csrfProtection, handleValidationErrors, getDate } = require('./utils');
+const { check, validationResult } = require("express-validator");
+const { asyncHandler, csrfProtection, handleValidationErrors, getDate, redirectToUser } = require('./utils');
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
@@ -9,18 +9,6 @@ const {Answer} = db
 const { Question, User } = db;
 
 router.use(requireAuth);
-
-router.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const questions = await Question.findAll({
-      include: [{ model: User, as: "user", attributes: ["username"] }],
-      order: [["createdAt", "DESC"]],
-      attributes: ["title", "body"]
-    })
-    res.json({ questions });
-  })
-)
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
@@ -39,17 +27,56 @@ const validateQuestion = [
     .withMessage("Title cannot be empty"),
   check("title")
     .isLength({ max: 300 })
-    .withMessage("Question title cannot be over 300 characters"),
-  handleValidationErrors,
+    .withMessage("Question title cannot be over 300 characters."),
+  check("categoryId")
+    .exists({ checkFalsy: true })
+    .withMessage("Must select a category for the question posted."),
 ];
 
 router.get(
   "/new",
-  (req, res) => {
-    res.render('new-question');
-  }
-)
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const categories = await db.Category.findAll();
+    let categoryArr = [];
+    categories.forEach( el =>  categoryArr.push(el))
 
+    res.render('new-question', { csrfToken: req.csrfToken(), categoryArr});
+  }
+))
+
+router.post(
+  "/new",
+  csrfProtection,
+  validateQuestion,
+  asyncHandler(async (req, res, next) => {
+    const userId = res.locals.user.id;
+    const { title, body, categoryId } = req.body;
+    let categoryArr = [];
+    const categories = await db.Category.findAll();
+    categories.forEach( category => categoryArr.push(category));
+    console.log(categoryId)
+    const question = Question.build({ title, body, categoryId, userId: res.locals.user.id, votes: 0 });
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      await question.save();
+      res.redirect(`/users/${res.locals.user.id}`);
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('new-question', {
+        title: 'New Question',
+        title,
+        body,
+        categoryId,
+        categoryArr,
+        errors,
+        csrfToken: req.csrfToken(),
+      })
+    }
+  })
+)
 
 router.get(
   '/:id',
@@ -82,18 +109,6 @@ router.get(
     }
   })
 );
-
-router.post(
-  "/",
-  csrfProtection,
-  validateQuestion,
-  asyncHandler(async (req, res) => {
-    const { title, body } = req.body;
-    const question = await Question.create({ title, body, userId: req.user.id });
-    res.json({ question });
-  })
-);
-
 
 router.post(
   "/:id/delete",
