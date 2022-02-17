@@ -2,6 +2,7 @@ var express = require('express');
 const { asyncHandler, csrfProtection, getDate } = require('./utils');
 const db = require('../db/models');
 var router = express.Router();
+// const { logoutUser } = require('../auth.js');
 
 /* GET users listing. */
 
