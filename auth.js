@@ -7,9 +7,8 @@ const loginUser = (req, res, user) => {
 
 const logoutUser = (req, res) => {
     delete req.session.auth;
-    req.session.save(() => res.redirect('/'));
-
-};
+    req.session.destroy(() => res.redirect('/'));
+}
 
 const restoreUser = async (req, res, next) => {
     if (req.session.auth) {

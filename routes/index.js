@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-const auth = require('../auth.js')
+const express = require('express');
+const router = express.Router();
+const db = require('../db/models');
+const { loginUser } = require('../auth.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { csrfProtection, asyncHandler } = require('./utils');

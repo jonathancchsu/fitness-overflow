@@ -11,7 +11,7 @@ block content
             .logo-img
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbell-img')
             a(href='/' class="fitness-font") Fitness-Overflow
-        if res.locals.authenticated
+        if locals.authenticated
             div.nav-display
                 form(action="/logout" method="post")
                     button(type='submit' class='logout-button') Log-Out
