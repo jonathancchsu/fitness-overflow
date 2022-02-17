@@ -1,5 +1,5 @@
 const express = require('express');
-const { check } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 const { asyncHandler, csrfProtection, handleValidationErrors, getDate } = require('./utils');
 const { requireAuth } = require("../auth");
 const router = express.Router();
@@ -9,18 +9,6 @@ const {Answer} = db
 const { Question, User } = db;
 
 router.use(requireAuth);
-
-router.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const questions = await Question.findAll({
-      include: [{ model: User, as: "user", attributes: ["username"] }],
-      order: [["createdAt", "DESC"]],
-      attributes: ["title", "body"]
-    })
-    res.json({ questions });
-  })
-)
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
@@ -50,6 +38,30 @@ router.get(
   }
 )
 
+router.post(
+  "/new",
+  csrfProtection,
+  validateQuestion,
+  asyncHandler(async (req, res) => {
+    const { title, body } = req.body;
+    const question = await db.Question.build({ title, body, userId: req.user.id });
+
+    const validatorErrors = validationResult(req);
+    if (validatorErrors.isEmpty()) {
+      await question.save();
+      res.redirect(`users/${req.user.id}`);
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('new-question', {
+        title: 'New Question',
+        title,
+        body,
+        errors,
+        csrfToken: req.csrfToken(),
+      })
+    }
+  })
+)
 
 router.get(
   '/:id',
@@ -82,18 +94,6 @@ router.get(
     }
   })
 );
-
-router.post(
-  "/",
-  csrfProtection,
-  validateQuestion,
-  asyncHandler(async (req, res) => {
-    const { title, body } = req.body;
-    const question = await Question.create({ title, body, userId: req.user.id });
-    res.json({ question });
-  })
-);
-
 
 router.post(
   "/:id/delete",
