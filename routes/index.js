@@ -3,12 +3,12 @@ var router = express.Router();
 const auth = require('../auth.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const { csrfProtection, asyncHandler, handleValidationErrors } = require('./utils');
+const { csrfProtection, asyncHandler } = require('./utils');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', csrfProtection, function(req, res, next) {
   console.log(res.locals.authenticated)
-  res.render('home.pug', { title: 'Fitness Overflow', req, res});
+  res.render('home.pug', { title: 'Fitness Overflow', req, res, csrfToken: req.csrfToken()});
 });
 
 const loginValidations = [
