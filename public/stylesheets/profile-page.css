@@ -4,7 +4,6 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 15px #3D405B;
-    height: 150px;
 }
 
 .nav-display-left {
@@ -13,10 +12,9 @@
     margin-left: 10%;
 }
 
-.dumbell-img {
-    display: flex;
-    align-items: flex-start;
-    height: 15em;
+.dumbbell-img {
+    height: 70px;
+    width: 70px;
 }
 
 p {
@@ -29,10 +27,6 @@ p {
     color: #F4F1DE;
     font-weight: bold;
     font-size: 20px;
-    position: relative;
-    bottom: 60px;
-    left: 30px;
-    
 }
 
 .nav-display-right {
@@ -109,41 +103,4 @@ p {
 
 .time-link {
     font-size: 15px;
-}
-
-#login-form{
-     display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
-  
-  border-radius: 10%;
-  background-color: #E07A5F;
-  
-}
-
-#login-word{
-     display: flex;
-  justify-content: center;
-}
-
-#login-form-field{
-      display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-.home-page{
-    left: 50%;
-    top: 50%;
-    margin: auto;
-    width: 50%;
-    height: 50%;
-    padding: 20px 35px;
-    border-radius: 10%;
-    background-color: #E07A5F;
-    border:2px solid black;
-    text-align: center;
-    margin-top: 50px;
 }

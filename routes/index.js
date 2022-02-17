@@ -4,8 +4,7 @@ const db = require('../db/models');
 const { loginUser } = require('../auth.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const { csrfProtection, asyncHandler } = require('./utils.js');
-const {Sequelize} = require('../db/models');
+const { csrfProtection, asyncHandler } = require('./utils');
 
 /* GET home page. */
 router.get('/', csrfProtection, function(req, res, next) {
@@ -54,32 +53,6 @@ router.post('/login', csrfProtection, loginValidations,
         errors,
         csrfToken: req.csrfToken(),
     });
-
-    router.get('/search', asyncHandler(async (req, res) => {
-        const { query } = req.query;
-        if (query === '') {
-            return res.render('search', {title:'Nothing was entered in search bar.', questions: []})
-        }
-        const questions = await db.Question.findAll({
-            where: {
-                [Sequelize.Op.or]: [
-                  {
-                      title: {
-                          [Sequelize.Op.iLike]: `%${query}%`,
-                      },
-                  },
-                  {
-                      body: {
-                          [Sequelize.Op.iLike]: `%${query}%`,
-                      },
-                  },  
-                ],
-            },
-            order: [['updatedAt', 'DESC']],
-        });
-
-        res.render('search', {title: `Results for "${query}"`, questions})
-    }));
 }));
 
 module.exports = router;
