@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection, handleValidationErrors, getDate } = requir
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
+const {Answer} = db
 
 const { Question, User } = db;
 
@@ -49,6 +50,7 @@ router.get(
   }
 )
 
+
 router.get(
   '/:id',
   asyncHandler(async (req, res, next) => {
@@ -63,13 +65,13 @@ router.get(
           questionId
         },
       include: [db.User],
-      order: [['updatedAt', 'DESC']]
+      order: [['createdAt', 'DESC']]
     });
 
     if (question) {
       res.render('specific-question', {
         user: req.session.auth.userId,
-        // answers,
+        answers,
         question,
         userId,
         questionDate
