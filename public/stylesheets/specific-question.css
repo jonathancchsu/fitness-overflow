@@ -47,7 +47,7 @@ p {
 }
 
 .logout-button {
-    border-radius: 10px;
+    border-radius: 25px;
     height: 25px;
     width: 70px;
     border: none;
@@ -59,45 +59,80 @@ p {
     cursor: pointer;
 }
 
-.content {
+h1 {
+    margin-top: 20px;
+    font-size: 35px;
+}
+
+.post-block {
+    border-bottom: 1px solid #3D405B;
+}
+
+.upper-question-block {
     display: flex;
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
 }
 
-.your-questions {
-    margin-top: 20px;
-}
-
-.your-post-title {
-    font-size: 35px;
-}
-
-.each-post-block {
-    border-bottom: 1px solid #3D405B;
-    margin-top: 20px;
-}
-
-.profile-img-small {
+.profile-img-2 {
     height: 30px;
     width: 30px;
 }
 
-.post-user {
+.username-and-img {
+    margin-top: 30px;
     display: flex;
     align-items: center;
 }
 
-.user-name {
+.username {
     margin-left: 10px;
-
-}
-
-.post-link {
     text-decoration: none;
 }
 
-.time-link {
+.date {
     font-size: 15px;
+}
+
+.post-contents {
+    padding-top: 25px;
+    border-top: 1px solid #3D405B;
+}
+
+.question-body {
+    font-size: 30px;
+}
+
+.lower-post-nav-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.edit-button {
+    border-radius: 25px;
+    margin-bottom: 20px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: #81B29A;
+    color: black;
+}
+
+.delete-button {
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: rgb(255, 143, 143);
+    color: black;
+}
+
+.edit-text,
+.delete-text {
+    display:block;
+    text-decoration: none;
 }

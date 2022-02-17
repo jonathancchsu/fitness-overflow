@@ -5,36 +5,28 @@ append head
 
 block content
     .nav-bar
-        div.nav-display
+        div.nav-display-left
             .logo-img
-                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbell-img')
+                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
             a(href='/' class="fitness-font") Fitness-Overflow
-        div.nav-display
+        div.nav-display-right
             form(action="/logout" method="post")
                 button(type='submit' class='logout-button') Log-Out
-            img(src='https://www.freeiconspng.com/uploads/profile-icon-9.png' class='profile-img')
-        .total-content
+            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
+    .total-content
         .content
-            .your-post-block
-                div
-                    img(src='https://www.freeiconspng.com/uploads/profile-icon-9.png' class='profile-img')
-
-                div
-                    h2.your-post-title Your Questions
-                    p.username= userName
+            .your-questions
+                div.title
+                    h2.your-post-title Your Questions:
 
             each question in questions
-                div.post-user
-                    img(src='https://www.freeiconspng.com/uploads/profile-icon-9.png' class='profile-img-post')
-                    p.user-name= userName
+                .each-post-block
+                    div.post-user
+                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
+                        p.user-name= question.User.username
 
-
-
-                a(href=`/questions/${question.id}` class="post-link"): div.post-box
-                    h1.post-titles.post-link=question.title
-                    p.post-link=question.content
-                    div
-                        p.post-link= postDate(question.createdAt)
-            div.caught-up
-                img(src='https://www.freeiconspng.com/uploads/check-mark-icon-21.png' class='caughtup-img')
-                p You're all caught up!
+                    a(href=`/questions/${question.id}` class="post-link"): div.post-box
+                        h1.post-titles.post-link=question.title
+                        p.post-link=question.body
+                        div
+                            p.time-link= questionDate(question.createdAt)

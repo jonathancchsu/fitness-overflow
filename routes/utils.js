@@ -39,4 +39,4 @@ const getDate = (date) => {
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-module.exports = { csrfProtection, asyncHandler, handleValidationErrors };
+module.exports = { csrfProtection, asyncHandler, handleValidationErrors, getDate };

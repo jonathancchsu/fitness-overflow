@@ -1,0 +1,45 @@
+extends layout.pug
+
+append head
+    link(rel='stylesheet' href='/stylesheets/specific-question.css')
+    script(src="/javascripts/specific-question.js" type="module" defer)
+
+block content
+    .nav-bar
+        div.nav-display-left
+            .logo-img
+                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
+            a(href='/' class="fitness-font") Fitness-Overflow
+        div.nav-display-right
+            form(action="/logout" method="post")
+                button(type='submit' class='logout-button') Log-Out
+            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
+    .main-body
+        .post-block
+            .upper-question-block
+                .title-img-content
+                    .username-and-img
+                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img-2')
+                        a(href=`/users/${questionId}` class='username')= question.User.username
+                    h1= question.title
+                    .date-block
+                        p(class='date')= questionDate(question.createdAt)
+                    .post-contents
+                        p.question-body= question.body
+                .lower-post-nav
+                    .lower-post-nav-left
+                    .lower-post-nav-right
+                        if (question.userId === userId)
+                            button(class='edit-button'): a(href=`/questions/${question.id}/edit` class='edit-text') Edit
+                            button(class='delete-button'): a(href=`/question/delete/${question.id}` class='edit-text') Delete
+        .answer-block
+            .main-answer-block
+                .img-and-name
+                    .username-and-img
+                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img-2')
+                        a(href=`/users/${questionId}` class='username')= question.User.username
+                    h1= question.title
+                    .date-block
+                        p(class='date')= questionDate(question.createdAt)
+                    .post-contents
+                        p.question-body= question.body
