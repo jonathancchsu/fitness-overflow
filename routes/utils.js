@@ -1,5 +1,7 @@
 const csrf = require('csurf');
 
+const {validationResult} = require("express-validator");
+
 const csrfProtection = csrf({ cookie: true});
 
 const asyncHandler = (handler) => (req, res, next) =>
@@ -39,4 +41,8 @@ const getDate = (date) => {
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-module.exports = { csrfProtection, asyncHandler, handleValidationErrors, getDate };
+const redirectToUser = (req, res) => {
+    return res.redirect(`./users/${res.locals.user.id}`)
+}
+
+module.exports = { csrfProtection, asyncHandler, handleValidationErrors, getDate, redirectToUser};
