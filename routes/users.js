@@ -10,10 +10,10 @@ const { logoutUser } = require('../auth.js');
 
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
-  if(res.locals.authenticated){
-    const userId = parseInt(req.params.id, 10);
+  const userId = parseInt(req.params.id, 10);
+  const user = db.User
     console.log(userId);
-    console.log(res.locals.user.id);
+    // console.log(res.locals.user.id);
   const questionDate = getDate;
   const questions = await db.Question.findAll({
     include: [db.User],
@@ -23,14 +23,15 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     order: [['updatedAt', 'DESC']]
   });
   res.render('profile-page', {
+    user,
     questions,
     questionDate,
     userId
-  })}
-  else {
-    res.render('/auth-error.pug')
-    res.redirect('/');
-  }
+  })
+
+
+
+
   // else{
   //   res.redirect('/');
   // }
