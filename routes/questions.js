@@ -43,12 +43,12 @@ const validateQuestion = [
   handleValidationErrors,
 ];
 
-const validateAnswer = [
-  check("body")
-    .exists({ checkFalsy: true })
-    .withMessage("Answers cannot be empty"),
-  handleValidationErrors,
-];
+router.get(
+  "/new",
+  (req, res) => {
+    res.render('new-question');
+  }
+)
 
 
 router.get(
@@ -144,11 +144,6 @@ router.post(
 //   })
 // );
 
-router.get(
-  "/new",
-  (req, res) => {
-    res.render('new-question');
-  }
-)
+
 
 module.exports = router;
