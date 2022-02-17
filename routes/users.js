@@ -28,7 +28,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     userId
   })}
   else {
-    res.render('/auth-error.pug')
+    res.render('auth-error.pug')
     res.redirect('/');
   }
   // else{

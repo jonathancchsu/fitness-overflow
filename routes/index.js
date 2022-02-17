@@ -39,7 +39,7 @@ router.post('/login', csrfProtection, loginValidations,
 
             if (passwordMatch) {
                 loginUser(req, res, user);
-                return res.redirect('/');
+                return res.redirect('/login');
             }
         }
         errors.push('Cannot find a valid user with the provided email and passwords.');
