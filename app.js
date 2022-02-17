@@ -11,7 +11,7 @@ const usersRouter = require('./routes/users');
 // const loginRouter = require('./routes/login');
 const sign_upRouter = require('./routes/signup');
 const questionsRouter = require('./routes/questions');
-const { restoreUser } = require('./auth.js');
+const { restoreUser, logoutUser } = require('./auth.js');
 
 
 const app = express();
@@ -43,10 +43,10 @@ store.sync();
 
 app.use(restoreUser);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-// app.use('/login', loginRouter);
 app.use('/sign-up', sign_upRouter);
 app.use('/questions', questionsRouter);
+app.use('/users', usersRouter);
+app.use(logoutUser)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
