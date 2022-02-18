@@ -57,6 +57,8 @@ block content
                             p(class='date')= questionDate(answer.createdAt)
                         .answer-contents
                             p.answer-body= answer.body
+                            .votes-block
+                                p.votes-counter votes: #{answer.votes}
         .footer
             .logo-img-lower
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')

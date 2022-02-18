@@ -42,7 +42,7 @@ const getDate = (date) => {
 }
 
 const redirectToUser = (req, res) => {
-    return res.redirect(`./users/${res.locals.user.id}`)
+    return res.redirect(`/users/${res.locals.user.id}`)
 }
 
 module.exports = { csrfProtection, asyncHandler, handleValidationErrors, getDate, redirectToUser};
