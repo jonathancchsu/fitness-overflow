@@ -1,3 +1,7 @@
+p {
+    text-decoration: none;
+}
+
 .nav-bar {
     background-color: #E07A5F;
     display: flex;
@@ -17,9 +21,6 @@
     width: 70px;
 }
 
-p {
-    text-decoration: none;
-}
 
 .fitness-font {
     text-decoration: none;
@@ -30,9 +31,15 @@ p {
 }
 
 .nav-display-right {
+
+    margin-right: 10%;
+
+}
+
+.search-and-icons {
     display: flex;
     align-items: center;
-    margin-right: 10%;
+
 }
 
 
@@ -47,7 +54,7 @@ p {
 }
 
 .logout-button,
-.log-in-button {
+.signup-button {
     border-radius: 10px;
     height: 25px;
     width: 70px;
@@ -62,69 +69,43 @@ p {
     cursor: pointer;
 }
 
-.content {
+.login-block {
+    display: flex;
+    justify-content: center;
+
+}
+
+.login-container {
     display: flex;
     flex-direction: column;
-    margin-left: 18%;
-    margin-right: 18%;
-}
-
-.questions-block {
-    border: 10px solid white;
-    border-radius: 25px;
-    margin-top: 25px;
+    justify-content: center;
+    width: 60%;
+    margin-top: 20px;
     padding: 10px;
-    box-shadow: inset 0px 0px 5px #3D405B, 0px 0px 20px #3D405B;
+    border: 1px solid #3D405B;
+    border-radius: 25px;
+    box-shadow: 0px 0px 15px #3D405B;
 }
 
-.your-questions {
-    margin-top: 20px;
-}
-
-.your-post-title {
-    font-size: 35px;
-}
-
-.each-post-block {
-    border-bottom: 1px solid #3D405B;
-    margin-top: 20px;
-}
-
-.profile-img-small {
-    height: 30px;
-    width: 30px;
-}
-
-.post-user {
+.inner-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.user-name {
-    margin-left: 10px;
-
+.pass,
+.em {
+    display: flex;
+    flex-direction: column;
 }
 
-.post-link {
-    text-decoration: none;
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 
-.time-link {
-    font-size: 15px;
-}
-
-.footer {
-    border-top: 1px solid #3D405B;
-    margin-top: 30px;
-    height: 74px;
+#login-fields {
     width: 100%;
-    background-color: #E07A5F;
-    position: absolute;
-    bottom: 0;
-}
-
-.logo-img-lower {
     display: flex;
-    align-items: center;
-    margin-left: 10%;
+    flex-direction: row;
 }

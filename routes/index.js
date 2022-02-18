@@ -22,7 +22,9 @@ const loginValidations = [
       .withMessage('Please enter a password to log in.')
 ]
 
-router.post('/login', csrfProtection, loginValidations,
+router.post('/login',
+    csrfProtection,
+    loginValidations,
     asyncHandler(async (req, res) => {
     const {
         email,
@@ -40,7 +42,7 @@ router.post('/login', csrfProtection, loginValidations,
 
             if (passwordMatch) {
                 loginUser(req, res, user);
-                return res.redirect('/login');
+                return res.redirect('/');
             }
         }
         errors.push('Cannot find a valid user with the provided email and passwords.');
