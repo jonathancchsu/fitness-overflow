@@ -62,27 +62,66 @@ p {
     cursor: pointer;
 }
 
+#h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .signup-username,
 .signup-email,
 .signup-password,
 .signup-confirmPassword {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
 }
 
+.big-block {
+    display: flex;
+    justify-content: center;
+}
+
 .signup-block {
+    width: 600px;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 10px solid white;
-    box-shadow: 0px 0px 15px #3D405B;
+    box-shadow: 0px 0px 15px #3D405B, inset 0px 0px 5px #3D405B;
 }
 
-.signup {
-    width: 500px;
+.signup-form {
+    width: 300px;
+    margin: 30px;
 }
 
 .input-fields {
     width: 300px;
+}
+
+.button-block {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.signup-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: #81B29A;
+    color: black;
+}
+
+.cancel-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: rgb(255, 143, 143);
+    color: black;
 }
