@@ -8,6 +8,7 @@ module.exports = {
             { username: 'Getgainz', email: 'hotjl@hotjl.com', hashedPassword: await bcrypt.hash('password', 10)},
             { username: 'Madison', email: 'Madison@test.com', hashedPassword: await bcrypt.hash('password', 10)},
             { username: 'David', email: 'David@test.com', hashedPassword: await bcrypt.hash('password', 10)},
+            { username: 'Demo-user', email: 'demo@demo.com', hashedPassword: await bcrypt.hash('demoPassword1!', 10)},
         ], {fields: ['username', 'email', 'hashedPassword'], returning: true});
 
     const categories = await queryInterface.bulkInsert('Categories', [

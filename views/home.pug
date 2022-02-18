@@ -3,40 +3,68 @@ extends layout.pug
 include utils.pug
 
 append head
-    link(rel='stylesheet' href='/stylesheets/profile-page.css')
+    link(rel='stylesheet' href='/stylesheets/home-page.css')
 
 block content
     .nav-bar
-        div.nav-display
+        div.nav-display-left
             .logo-img
-                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbell-img')
+                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
             a(href='/' class="fitness-font") Fitness-Overflow
-            form(action='/search' class='search-bar')
-                input(type='search' name='query' placeholder='Search' )
-        if locals.authenticated
-            div.nav-display
-                form(action="/logout" method="post")
-                    button(type='submit' class='logout-button') Log-Out
-                img(src='https://www.freeiconspng.com/uploads/profile-icon-9.png' class='profile-img')
-            .total-content
-        else
-            //- div.nav-display
-            //-     form(action="/login" method="get")
-            //-         button(class='login-button') Log-In
-            //-     img(src='https://www.freeiconspng.com/uploads/profile-icon-9.png' class='profile-img')
 
-            +validationErrors(errors)
-            #login-page
-            div#login-form
-                h2#h2 Login
-                form(action='/login' id='login-form-field' method='post')
-                    input(type='hidden' name='_csrf' value=csrfToken)
-                    div#login-email
-                        +field('Email', 'email', email, 'email')
-                    div#login-password
-                        +field('Password', 'password', '', 'password')
-                    button(type='submit' class='submit-login-info') Login
-            div#register-button
-                form(action="/sign-up" method="get")
-                    button(type='submit' class='sign-up-button') Register for an account!
-            .total-content
+        div.nav-display-right
+            .search-and-icons
+                form(action='/search' class='search-bar')
+                    input(type='search' name='query' placeholder='Search' )
+                if locals.authenticated
+                    form(action="/logout" method="post")
+                        button(type='submit' class='logout-button') Log-Out
+                if !locals.authenticated
+                    a(href='/sign-up' class='signup-link'): button(type='button' class='signup-button') Sign-up
+                img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
+    .total-content
+        //- if !locals.authenticated
+        //-     .login-block
+        //-         .login-content
+        //-             +validationErrors(errors)
+        //-             #login-content
+        //-             div#login-fields
+        //-                 h2#h2 Login
+        //-                 form(action='/login' id='login-form-field' method='post')
+        //-                     input(type='hidden' name='_csrf' value=csrfToken)
+        //-                     div#login-email
+        //-                         +field('Email', 'email', email, 'email')
+        //-                     div#login-password
+        //-                         +field('Password', 'password', '', 'password')
+        //-                     button(type='submit' class='submit-login-info') Login
+        //-             div#register-button
+        //-                 form(action="/sign-up" method="get")
+        //-                     button(type='submit' class='sign-up-button') Register for an account!
+        if !locals.authenticated
+            .login-block
+                .login-container
+                    div.error-container
+                        ul
+                        if errors
+                            each error in errors
+                                li.list=error
+                        .inner-container
+                            form(action='/login' method='post')
+                                input(type='hidden' name='_csrf' value=csrfToken)
+                                .email-label-and-inp.em
+                                    label(for='email' class='font') Email
+                                    input(type="text" name='email' class='email-input inp' value=email)
+                                .password-label-and-inp.pass
+                                    label(for="password" class='font') Password
+                                    input(type='password' name='password' class='password-input inp')
+                                .button-container
+                                    button(type='submit' class='login-button') Log-In
+                                //- .demo-button-container
+                                //-     form(action='/login' method='post')
+                                //-         input(type='hidden' name='_csrf' value=csrfToken)
+                                //-         input(type='hidden' name='email' value='demo@demo.com')
+                                //-         input(type='hidden' name='password' value='demoPassword1!')
+                                //-         button(class='demo-button') Demo User
+                        //- .signup-container
+                        //-     p.font Don't have an account?
+                        //-         a(class='signup-option font' href='/signup' ) Sign Up

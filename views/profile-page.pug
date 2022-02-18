@@ -26,17 +26,23 @@ block content
                 .your-questions
                         div.title
                             h2.your-post-title #{username}'s Questions:
-            if questions
-                each question in questions
-                    .each-post-block
-                        div.post-user
-                            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
-                            p.user-name= question.User.username
+            .questions-block
+                if questions
+                    each question in questions
+                        .each-post-block
+                            div.post-user
+                                img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
+                                p.user-name= question.User.username
 
-                        a(href=`/questions/${question.id}` class="post-link"): div.post-box
-                            h1.post-titles.post-link=question.title
-                            p.post-link=question.body
-                            div
-                                p.time-link= questionDate(question.createdAt)
-            unless !questions
-                p.no-questions has not created any questions yet...
+                            a(href=`/questions/${question.id}` class="post-link"): div.post-box
+                                h1.post-titles.post-link=question.title
+                                p.post-link=question.body
+                                div
+                                    p.time-link= questionDate(question.createdAt)
+                unless !questions
+                    p.no-questions has not created any questions yet...
+
+    .footer
+            .logo-img-lower
+                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
+                a(href='/' class="fitness-font") Fitness-Overflow
