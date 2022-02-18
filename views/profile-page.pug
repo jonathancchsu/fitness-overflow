@@ -18,7 +18,7 @@ block content
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
     .total-content
         .content
-            if locals.user.id === userId
+            if res.locals.user.id === userId
                 .your-questions
                     div.title
                         h2.your-post-title Your Questions:
@@ -26,14 +26,17 @@ block content
                 .your-questions
                         div.title
                             h2.your-post-title #{username}'s Questions:
-            each question in questions
-                .each-post-block
-                    div.post-user
-                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
-                        p.user-name= question.User.username
+            if questions
+                each question in questions
+                    .each-post-block
+                        div.post-user
+                            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
+                            p.user-name= question.User.username
 
-                    a(href=`/questions/${question.id}` class="post-link"): div.post-box
-                        h1.post-titles.post-link=question.title
-                        p.post-link=question.body
-                        div
-                            p.time-link= questionDate(question.createdAt)
+                        a(href=`/questions/${question.id}` class="post-link"): div.post-box
+                            h1.post-titles.post-link=question.title
+                            p.post-link=question.body
+                            div
+                                p.time-link= questionDate(question.createdAt)
+            unless !questions
+                p.no-questions has not created any questions yet...

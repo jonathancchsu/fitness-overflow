@@ -12,7 +12,6 @@ const { logoutUser } = require('../auth.js');
 router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const userId = parseInt(req.params.id, 10);
   const user = db.User
-    console.log(userId);
     // console.log(res.locals.user.id);
   const questionDate = getDate;
   const questions = await db.Question.findAll({
@@ -22,9 +21,11 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     },
     order: [['updatedAt', 'DESC']]
   });
-  const username = questions[0].User.username
-  console.log(username)
+  const usern = await db.User.findByPk(userId)
+  const username = usern.username
+  console.log(res.locals.user.id)
   res.render('profile-page', {
+    res,
     user,
     questions,
     questionDate,
