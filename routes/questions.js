@@ -4,7 +4,6 @@ const { asyncHandler, csrfProtection, handleValidationErrors, getDate, redirectT
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
-const {Answer} = db
 
 const { Question, User } = db;
 
@@ -32,6 +31,26 @@ const validateQuestion = [
     .exists({ checkFalsy: true })
     .withMessage("Must select a category for the question posted."),
 ];
+
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.users.id;
+    const questionDate = getDate;
+    const questions = await db.Question.findAll({
+      include: [db.User],
+      where: {
+        userId
+      },
+      order: [['updatedAt', 'DESC']]
+    })
+    res.render('all-question', {
+      questions,
+      questionDate,
+      userId,
+    })
+  })
+)
 
 router.get(
   "/new",
