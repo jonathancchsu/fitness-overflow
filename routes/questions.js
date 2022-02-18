@@ -35,19 +35,19 @@ const validateQuestion = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const userId = res.locals.users.id;
+    // const userId = res.locals.user.id;
     const questionDate = getDate;
     const questions = await db.Question.findAll({
       include: [db.User],
-      where: {
-        userId
-      },
+      // where: {
+      //   userId
+      // },
       order: [['updatedAt', 'DESC']]
     })
-    res.render('all-question', {
+    // console.log(questions)
+    res.render('all-questions', {
       questions,
-      questionDate,
-      userId,
+      questionDate
     })
   })
 )

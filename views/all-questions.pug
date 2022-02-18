@@ -18,14 +18,13 @@ block content
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
     .total-content
         .content
-          each question in questions
-              .each-post-block
-                  div.post-user
-                      img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
-                      p.user-name= question.User.username
-
-                  a(href=`/questions/${question.id}` class="post-link"): div.post-box
-                      h1.post-titles.post-link=question.title
-                      p.post-link=question.body
-                      div
-                          p.time-link= questionDate(question.createdAt)
+            each question in questions
+                .each-post-block
+                    div.post-user
+                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
+                        a(href=`/users/${question.User.id}`): p.user-name= question.User.username
+                    a(href=`/questions/${question.id}` class="post-link"): div.post-box
+                        h1.post-titles.post-link=question.title
+                        p.post-link=question.body
+                        div
+                            p.time-link= questionDate(question.createdAt)
