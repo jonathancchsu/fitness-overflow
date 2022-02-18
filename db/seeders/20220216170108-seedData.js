@@ -29,20 +29,26 @@ module.exports = {
             { title: 'Free weights or machine', body: 'I am starting off my fitness journey and was confused on where to start. Should I focus more on free weights or just use the machines they have at the gym?', userId: 1, categoryId: 5, votes:0},
             { title: 'Time distribution', body: 'How many exercises and time should we allocate for each workout?', userId: 2, categoryId: 6, votes:0},
             { title: 'Why is interval training important?', body: 'What are the benefits if I include this in my workout regimen?', userId:3, categoryId: 7, votes:0},
+            { title: 'Why do my eyes hurt when I squat?', body: 'My eyes hurt so bad when I squat, and I\'ve asked so many people about this.', userId:5, categoryId: 3, votes:0},
+            { title: 'My nose bleeds when I dead-lift', body: 'Anyone else have this issue?', userId:5, categoryId: 2, votes:0},
+            { title: 'Whats the best protien powter for playing DOTA?', body: 'I need to increase my macros while storming gates', userId:5, categoryId: 4, votes:0},
         ], {fields: ['title', 'body', 'userId', 'categoryId', 'votes'], returning: true});
 
     const answers = await queryInterface.bulkInsert('Answers', [
-            { body: 'Eggs can be bad if you have high cholesterol. Eat in moderation boy/girl!', userId: 2, questionId: 1},
-            { body: 'Eggs are lowkey nasty', userId: 4, questionId: 1},
-            { body: 'I usually just eat the egg whites, but I have them quite often, so far so good!', userId: 3, questionId: 1},
-            { body: 'Turns out I have high cholesterol', userId: 2, questionId: 1},
-            { body: 'Does not matter! Whenever you feel energized I say go for it!', userId: 1, questionId: 2},
-            { body: 'Are you seriously asking this? Some do and some do not. Just put the work in and you should be fine.', userId: 1, questionId: 3},
-            { body: 'I try to run in a area with nice scenery so I can enjoy running!', userId: 2, questionId: 4},
-            { body: 'I would say start out with machines and work on free weights when you feel comfortable. You got this!', userId: 4, questionId: 5},
-            { body: 'Depends on your free time and equipment you have.', userId: 3, questionId: 6},
-            { body: 'Switching your workouts help develop your muscles better from time to time.', userId: 4, questionId: 7},
-        ], {fields: ['body', 'userId', 'questionId'], returning: true});
+            { body: 'You probably just need to strecth more', userId: 2, questionId: 8, votes: 40},
+            { body: 'Dont deadlift, only workout arms and neck', userId: 3, questionId: 9, votes: 3},
+            { body: 'Raw eggs are best for DOTA, trust', userId: 4, questionId: 10, votes: 587},
+            { body: 'Eggs can be bad if you have high cholesterol. Eat in moderation boy/girl!', userId: 2, questionId: 1, votes: 20},
+            { body: 'Eggs are lowkey nasty', userId: 4, questionId: 1, votes: 4},
+            { body: 'I usually just eat the egg whites, but I have them quite often, so far so good!', userId: 3, questionId: 1, votes: 45},
+            { body: 'Turns out I have high cholesterol', userId: 2, questionId: 1, votes: 6},
+            { body: 'Does not matter! Whenever you feel energized I say go for it!', userId: 1, questionId: 2, votes: 342},
+            { body: 'Are you seriously asking this? Some do and some do not. Just put the work in and you should be fine.', userId: 1, questionId: 3, votes: -68},
+            { body: 'I try to run in a area with nice scenery so I can enjoy running!', userId: 2, questionId: 4, votes: 34},
+            { body: 'I would say start out with machines and work on free weights when you feel comfortable. You got this!', userId: 4, questionId: 5, votes: 5},
+            { body: 'Depends on your free time and equipment you have.', userId: 3, questionId: 6, votes: 11},
+            { body: 'Switching your workouts help develop your muscles better from time to time.', userId: 4, questionId: 7, votes: 40},
+        ], {fields: ['body', 'userId', 'questionId', 'votes'], returning: true});
 
      /*await queryInterface.bulkInsert('Votes', [
             { value: true, userId: 1, answerId: 1},
