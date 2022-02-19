@@ -74,7 +74,7 @@ router.post(
     let categoryArr = [];
     const categories = await db.Category.findAll();
     categories.forEach( category => categoryArr.push(category));
-    console.log(categoryId)
+    // console.log(categoryId)
     const question = Question.build({ title, body, categoryId, userId: res.locals.user.id, votes: 0 });
 
     const validatorErrors = validationResult(req);

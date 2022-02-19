@@ -1,11 +1,31 @@
 extends layout.pug
 
+append head
+    link(rel='stylesheet' href='/stylesheets/search.css')
+
 block content
-  div.questions-div
-    if questions.length
-      each question in questions
-        .question-div
-          a(href=`/questions/${question.id}` class='question-title')= question.title
-          p= question.body
-    else
-      p#no-results There are no results that matches your search.
+  .nav-bar
+    div.nav-display-left
+        .logo-img
+            a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
+        a(href='/' class="fitness-font") Fitness-Overflow
+    div.nav-display-right
+        .search-and-icons
+            form(action='/search' class='search-bar')
+                input(type='search' name='query' placeholder='Search' )
+            if locals.authenticated
+                form(action="/logout" method="post")
+                    button(type='submit' class='logout-button') Log-Out
+            if !locals.authenticated
+                a(href='/sign-up' class='signup-link'): button(type='button' class='signup-button') Sign-up
+            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
+  .total-content
+    .content
+    div.questions-div
+        if questions.length
+          each question in questions
+            .question-div
+              a(href=`/questions/${question.id}` class='question-title')= question.title
+              p= question.body
+        else
+          p#no-results There are no results that matches your search.

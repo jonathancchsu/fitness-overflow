@@ -42,7 +42,7 @@ router.post('/login',
 
             if (passwordMatch) {
                 loginUser(req, res, user);
-                return res.redirect('/');
+                return res.redirect('/questions');
             }
         }
         errors.push('Cannot find a valid user with the provided email and passwords.');
