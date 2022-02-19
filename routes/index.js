@@ -22,7 +22,7 @@ const loginValidations = [
       .withMessage('Please enter a password to log in.')
 ]
 
-router.post('/login',
+router.post('/',
     csrfProtection,
     loginValidations,
     asyncHandler(async (req, res) => {

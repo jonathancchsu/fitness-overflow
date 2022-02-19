@@ -2,19 +2,30 @@ extends layout.pug
 
 include utils.pug
 
+append head
+    link(rel='stylesheet' href='/stylesheets/signup.css')
+
 block content
+  .nav-bar
+        div.nav-display-left
+            .logo-img
+                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
+            a(href='/' class="fitness-font") Fitness-Overflow
   +validationErrors(errors)
-  .signup
-    div.signup-form
-      h2#h2 Signup
-      form(action='/sign-up' class='signup-form-field' method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        div.signup-username
-          +field('Username', 'username', username)
-        div.signup-email
-          +field('Email', 'email', email, 'email')
-        div.signup-password
-          +field('Password', 'password', '', 'password')
-        div.signup-confirmPassword
-          +field('Confirm password', 'confirmPassword', '', 'password')
-        button(type='submit') Sign up
+  .big-block
+    .signup-block
+      .signup
+        .signup-form
+          form(action='/sign-up' class='signup-form-field' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            div.signup-username
+              +field('Username', 'username', username)
+            div.signup-email
+              +field('Email', 'email', email, 'email', email)
+            div.signup-password
+              +field('Password', 'password', '', 'password')
+            div.signup-confirmPassword
+              +field('Confirm password', 'confirmPassword', '', 'password')
+            .button-block
+              button(type='submit' class="signup-button") Sign up
+              a(href='/'): button(type='button' class='cancel-button') Cancel

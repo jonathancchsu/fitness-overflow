@@ -54,7 +54,29 @@ p {
 }
 
 .logout-button,
-.signup-button {
+.login-button{
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: black;
+    color: #F4F1DE;
+    margin-left: 10px;
+}
+
+.new-q-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 110px;
+    border: none;
+    background-color: #3D405B ;
+    color: #F4F1DE;
+    margin-left: 10px;
+}
+
+
+
+.demo-button {
     border-radius: 10px;
     height: 25px;
     width: 70px;
@@ -62,29 +84,67 @@ p {
     background-color: black;
     color: #F4F1DE;
 }
+.signup-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: black;
+    color: #F4F1DE;
+    margin-left: 10px;
+}
 
 
 .logout-button:hover,
-.log-in-button:hover {
+.log-in-button:hover,
+.new-q-button:hover,
+.signup-button:hover {
     cursor: pointer;
 }
 
 .login-block {
     display: flex;
-    justify-content: center;
+    height: 50vh;
+    /* display: table-row; */ 
+    width: 50vh;
+}
 
+.home-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bkg-img { 
+   height: 100vh;
+   float: left;
+   object-fit: cover;
+   width: 50%;
+   border-radius: 5px;
+   box-shadow: 0px 0px 25px #3D405B;
+}
+.bkg-text {
+    display: flex;
+    align-items: center;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    size: 20px;
+    color: #F4F1DE;
 }
 
 .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 60%;
-    margin-top: 20px;
-    padding: 10px;
+    margin-top: 0px;
+    padding: 20px;
     border: 1px solid #3D405B;
-    border-radius: 25px;
-    box-shadow: 0px 0px 15px #3D405B;
+    border-radius: 15px;
+    box-shadow: 0px 0px 25px #3D405B;
+    height: 50vh;
+    width: 50%
 }
 
 .inner-container {
@@ -98,6 +158,24 @@ p {
     display: flex;
     flex-direction: column;
 }
+.password-label-and-inp.pass {
+    font-weight: bold;
+    color: #F4F1DE;
+}
+
+.email-label-and-inp.em {
+    font-weight: bold;
+    color: #F4F1DE;
+}
+
+.password-label-and-inp.pass#password-in {
+    border-radius: 20px;
+}
+.email-label-and-inp.em#email-in {
+    border-radius: 20px;
+}
+
+
 
 .button-container {
     display: flex;

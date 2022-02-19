@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection, handleValidationErrors, getDate, redirectT
 const { requireAuth } = require("../auth");
 const router = express.Router();
 const db = require('../db/models');
+const { CommandCompleteMessage } = require('pg-protocol/dist/messages');
 
 const { Question, User } = db;
 
@@ -129,28 +130,43 @@ router.get(
   })
 );
 
+router.get('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const userId = req.session.auth.userId
+  const questionDate = getDate;
+  const question = await db.Question.findByPk(questionId, {
+    include: db.User
+  });
+  res.render('specific-question-delete', {
+    userId,
+    question,
+    questionDate,
+    csrfToken: req.csrfToken(),
+  });
+
+
+}));
+
 router.post(
-  "/:id/delete",
-  asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
+  "/delete/:id",
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const specificQuestion = await db.Question.findByPk(questionId, {
+      include: db.User
     });
-    if (req.user.id !== question.userId) {
-      const err = new Error("Unauthorized");
-      err.status = 401;
-      err.message = "You do not have the right to edit this question.";
-      err.title = "Unauthorized";
-      throw err;
-    }
-    if (question) {
-      await question.destroy();
-      res.json({ message: `Deleted question with id of ${req.params.id}.` });
-    } else {
-      next(questionNotFoundError(req.params.id));
-    }
-  })
+    const answers = await db.Answer.findAll({
+      where: { questionId }
+    })
+
+    answers.forEach(async (answer) => {
+      await answer.destroy()
+    })
+
+    await specificQuestion.destroy()
+
+    res.redirect(`/users/${specificQuestion.userId}`)
+  }
+  )
 );
 
 

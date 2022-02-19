@@ -62,69 +62,66 @@ p {
     cursor: pointer;
 }
 
-.content {
+#h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.signup-username,
+.signup-email,
+.signup-password,
+.signup-confirmPassword {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    margin-left: 18%;
-    margin-right: 18%;
 }
 
-.questions-block {
+.big-block {
+    display: flex;
+    justify-content: center;
+}
+
+.signup-block {
+    width: 600px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 10px solid white;
-    border-radius: 25px;
-    margin-top: 25px;
-    padding: 10px;
-    box-shadow: inset 0px 0px 5px #3D405B, 0px 0px 20px #3D405B;
+    box-shadow: 0px 0px 15px #3D405B, inset 0px 0px 5px #3D405B;
 }
 
-.your-questions {
-    margin-top: 20px;
+.signup-form {
+    width: 300px;
+    margin: 30px;
 }
 
-.your-post-title {
-    font-size: 35px;
+.input-fields {
+    width: 300px;
 }
 
-.each-post-block {
-    border-bottom: 1px solid #3D405B;
-    margin-top: 20px;
-}
-
-.profile-img-small {
-    height: 30px;
-    width: 30px;
-}
-
-.post-user {
+.button-block {
+    margin-top: 15px;
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
 }
 
-.user-name {
-    margin-left: 10px;
-
+.signup-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: #81B29A;
+    color: black;
 }
 
-.post-link {
-    text-decoration: none;
-}
-
-.time-link {
-    font-size: 15px;
-}
-
-.footer {
-    border-top: 1px solid #3D405B;
-    margin-top: 30px;
-    height: 74px;
-    width: 100%;
-    background-color: #E07A5F;
-    position: relative;
-    bottom: 0;
-}
-
-.logo-img-lower {
-    display: flex;
-    align-items: center;
-    margin-left: 10%;
+.cancel-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: rgb(255, 143, 143);
+    color: black;
 }
