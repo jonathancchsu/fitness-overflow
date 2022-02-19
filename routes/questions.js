@@ -121,9 +121,11 @@ router.post(
 
 router.get(
   '/:id',
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
     const userId = req.session.auth.userId
     const questionDate = getDate;
+    const categoryArr = await db.Category.findAll()
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {
       include: [db.User],
@@ -139,11 +141,12 @@ router.get(
     if (question) {
       res.render('specific-question', {
         user: req.session.auth.userId,
+        categoryArr,
         answers,
         question,
         userId,
-        questionDate
-
+        questionDate,
+        csrfToken: req.csrfToken()
       });
     } else {
       next(questionNotFoundError(req.params.id));
@@ -168,7 +171,42 @@ router.get('/:id/delete', csrfProtection, asyncHandler(async (req, res) => {
 
 }));
 
+router.post('/edit/:id', csrfProtection, asyncHandler(async (req, res) => {
+  const userId = req.session.auth.userId
+  const questionDate = getDate;
+  const categoryArr = await db.Category.findAll()
+  const questionId = parseInt(req.params.id, 10);
+  const question = await db.Question.findByPk(questionId, {
+    include: [db.User],
+  });
+  const answers = await db.Answer.findAll({
+    where: {
+      questionId
+    },
+    include: [db.User],
+    order: [['createdAt', 'DESC']]
+  });
 
+
+  const { title, body } = req.body;
+  question.title = title;
+  question.body = body;
+
+  await question.save()
+
+  if (question) {
+    res.render('specific-question', {
+      user: req.session.auth.userId,
+      categoryArr,
+      answers,
+      question,
+      userId,
+      questionDate,
+      csrfToken: req.csrfToken()
+    });
+
+  }
+}));
 
 
 // router.delete(

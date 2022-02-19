@@ -210,8 +210,8 @@ h1 {
     color: black;
     top: 5px;
     font-weight: bold;
-    
-    
+
+
 }
 
 .up-button:hover,
@@ -248,4 +248,8 @@ h1 {
     background-color: white;
     color: black;
 
+}
+
+.hidden-form {
+    display: none;
 }
