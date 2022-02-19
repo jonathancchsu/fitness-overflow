@@ -66,7 +66,7 @@ block content
     .delete-form
         .form-box
             p.question Are you sure you want to delete?
-            form(action=`/questions/delete/:id` method='post')
+            form(action=`/questions/delete/${question.id}` method='delete')
                 input(type='hidden' name='_csrf' value=csrfToken)
                 .buttons-section
                     button(type='submit' class='delete-button') Delete

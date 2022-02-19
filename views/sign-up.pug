@@ -11,7 +11,9 @@ block content
             .logo-img
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
             a(href='/' class="fitness-font") Fitness-Overflow
-  +validationErrors(errors)
+  .errors-block
+    .errors-b
+      +validationErrors(errors)
   .big-block
     .signup-block
       .signup

@@ -41,8 +41,9 @@ block content
                                 p.post-link=question.body
                                 div
                                     p.time-link= questionDate(question.createdAt)
-                unless !questions
+                else
                     p.no-questions has not created any questions yet...
+
 
     .footer
             .logo-img-lower
