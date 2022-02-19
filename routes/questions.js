@@ -34,6 +34,27 @@ const validateQuestion = [
 ];
 
 router.get(
+  "/delete/:id",
+  asyncHandler(async (req, res) => {
+    console.log(`\n\n\n\n\n ${req.params.id} \n\n\n\n\n`)
+    const questionId = parseInt(req.params.id, 10);
+    const specificQuestion = await db.Question.findByPk(questionId);
+    const answers = await db.Answer.findAll({
+      where: { questionId }
+    })
+    console.log(`\n\n\n\n\n ${answers} \n\n\n\n\n`)
+    answers.forEach(async (answer) => {
+      await answer.destroy()
+    })
+
+    await specificQuestion.destroy()
+
+    res.redirect(`/users/${specificQuestion.userId}`)
+  }
+  )
+);
+
+router.get(
   "/",
   asyncHandler(async (req, res) => {
     // const userId = res.locals.user.id;
@@ -130,7 +151,7 @@ router.get(
   })
 );
 
-router.get('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
+router.get('/:id/delete', csrfProtection, asyncHandler(async (req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const userId = req.session.auth.userId
   const questionDate = getDate;
@@ -147,27 +168,7 @@ router.get('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) =>
 
 }));
 
-router.post(
-  "/delete/:id",
-  asyncHandler(async (req, res) => {
-    const questionId = parseInt(req.params.id, 10);
-    const specificQuestion = await db.Question.findByPk(questionId, {
-      include: db.User
-    });
-    const answers = await db.Answer.findAll({
-      where: { questionId }
-    })
 
-    answers.forEach(async (answer) => {
-      await answer.destroy()
-    })
-
-    await specificQuestion.destroy()
-
-    res.redirect(`/users/${specificQuestion.userId}`)
-  }
-  )
-);
 
 
 // router.delete(

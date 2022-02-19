@@ -125,3 +125,16 @@ p {
     background-color: rgb(255, 143, 143);
     color: black;
 }
+
+
+.errors-block{
+    display: flex;
+    justify-content: center;
+}
+
+.errors-b {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+}
