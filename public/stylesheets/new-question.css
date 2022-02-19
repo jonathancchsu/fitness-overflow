@@ -104,3 +104,19 @@ h2 {
 #category {
   margin-left: 1%;
 }
+
+.footer {
+  border-top: 1px solid #3D405B;
+  margin-top: 30px;
+  height: 74px;
+  width: 100%;
+  background-color: #E07A5F;
+  position: relative;
+  bottom: 0;
+}
+
+.logo-img-lower {
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+}
