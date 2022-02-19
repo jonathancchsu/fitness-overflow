@@ -13,6 +13,8 @@ block content
             if locals.authenticated
                 form(action="/logout" method="post")
                     button(type='submit' class='logout-button') Log-Out
+                form(action='/search' class='search-bar')
+                    input(type='search' name='query' placeholder='Search' )
             else
                 a(href='/' class='log-in-link'): button(type='button' class='log-in-button') Log-In
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')

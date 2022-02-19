@@ -12,6 +12,8 @@ block content
             a(href='/' class="fitness-font") Fitness-Overflow
         div.nav-display-right
             if locals.authenticated
+                form(action='/search' class='search-bar')
+                    input(type='search' name='query' placeholder='Search' )
                 form(action="/logout" method="post")
                     button(type='submit' class='logout-button') Log-Out
             else
@@ -44,8 +46,9 @@ block content
                 else
                     h2.please-log-in Please log in to answer this question...
 
-            .answers-title
-                 h2.answers-text Answers:
+                .answers-title
+                    h2.answers-text Answers:
+
 
             each answer in answers
                     .img-and-name
@@ -62,6 +65,7 @@ block content
                             h4.up-button Upvote
                             h4.down-button Downvote
                             
+
         .footer
             .logo-img-lower
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')

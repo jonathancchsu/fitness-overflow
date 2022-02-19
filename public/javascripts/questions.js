@@ -1,3 +1,5 @@
-window.addEventListener('DOMContentLoaded', async () =>{
-    
+
+window.addEventListener('DOMContentLoaded', async () => {
+  
+
 })
