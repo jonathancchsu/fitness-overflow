@@ -136,7 +136,8 @@ h1 {
 }
 
 .edit-button,
-.edit-question-button {
+.edit-question-button,
+.edit-answer-button {
     border-radius: 25px;
     margin-bottom: 20px;
     height: 25px;
@@ -254,11 +255,13 @@ h1 {
 }
 
 .up-button:hover,
-.down-button:hover {
+.down-button:hover,
+.delete-answer-button:hover {
     cursor: pointer;
 }
 
-.delete-form {
+.delete-form,
+.form-box {
     background-color: white;
     width: 200px;
     height: 200px;
@@ -266,7 +269,7 @@ h1 {
     margin: auto;
     box-shadow: 0 0 10px 5px #3D405B;
     border-radius: 25px;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     top: 50%;
     left: 50%;
@@ -277,8 +280,11 @@ h1 {
     align-items: center;
 }
 
-.delete-button-2 {
+.delete-button-2,
+.delete-answer-button {
     border-radius: 25px;
+    margin-left: 10px;
+    margin-bottom: 20px;
     height: 25px;
     width: 70px;
     border: none;
@@ -286,7 +292,8 @@ h1 {
     color: black;
 }
 
-.cancel-button{
+.cancel-button,
+.cancel-button-2 {
     border: 1px solid black;
     border-radius: 25px;
     margin-left: 10px;
@@ -325,4 +332,13 @@ h1 {
 .hidden-form-body {
     display: flex;
     flex-direction: column;
+}
+
+.edit-delete-votes-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-answers-form {
+    display: none;
 }

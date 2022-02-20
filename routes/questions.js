@@ -6,7 +6,7 @@ const router = express.Router();
 const db = require('../db/models');
 const { CommandCompleteMessage } = require('pg-protocol/dist/messages');
 
-const { Question, User } = db;
+const { Question, User, Answer } = db;
 
 router.use(requireAuth);
 
@@ -33,6 +33,12 @@ const validateQuestion = [
     .withMessage("Must select a category for the question posted."),
 ];
 
+const validateAnswer = [
+  check('body')
+    .exists({ checkFalsy: true })
+    .withMessage('Answer cannot be empty')
+];
+
 router.get(
   "/delete/:id",
   asyncHandler(async (req, res) => {
@@ -42,7 +48,6 @@ router.get(
     const answers = await db.Answer.findAll({
       where: { questionId }
     })
-    console.log(`\n\n\n\n\n ${answers} \n\n\n\n\n`)
     answers.forEach(async (answer) => {
       await answer.destroy()
     })
@@ -82,7 +87,7 @@ router.get(
     const categories = await db.Category.findAll();
     const userId = res.locals.user.id
     let categoryArr = [];
-    categories.forEach( el =>  categoryArr.push(el))
+    categories.forEach(el => categoryArr.push(el))
 
     res.render('new-question', {
       userId,
@@ -90,7 +95,58 @@ router.get(
       csrfToken: req.csrfToken(),
     });
   }
-))
+  ))
+
+router.post('/:id/answers/new',
+  csrfProtection,
+  validateAnswer,
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const idQuestion = parseInt(req.params.id, 10);
+    const question = await db.Question.findByPk(idQuestion, {
+      include: [db.User],
+    });
+    const { body, questionId } = req.body;
+    const answer = Answer.build({ body, questionId: idQuestion, userId: userId, votes: 0 })
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      await answer.save();
+      res.redirect(`/questions/${question.id}`)
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('specific-question', {
+        title: 'Specific Question',
+        userId,
+        questionId,
+        title,
+        body,
+        errors,
+        csrfToken: req.csrfToken(),
+      })
+    }
+  }))
+
+
+router.get(
+  "/:id/answers/delete/:id",
+  asyncHandler(async (req, res) => {
+    console.log(`\n\n\n\n\n ${req.params.id} \n\n\n\n\n`)
+    console.log(req.params)
+    const questionId = answers.questionId
+    const answers = await db.Answer.findAll({
+      where: { questionId }
+    })
+    answers.forEach(async (answer) => {
+      await answer.destroy()
+    })
+
+
+    res.redirect(`/users`)
+  }
+  )
+);
 
 router.post(
   "/new",
@@ -101,7 +157,7 @@ router.post(
     const { title, body, categoryId } = req.body;
     let categoryArr = [];
     const categories = await db.Category.findAll();
-    categories.forEach( category => categoryArr.push(category));
+    categories.forEach(category => categoryArr.push(category));
     // console.log(categoryId)
     const question = Question.build({ title, body, categoryId, userId: res.locals.user.id, votes: 0 });
 
@@ -138,9 +194,9 @@ router.get(
       include: [db.User],
     });
     const answers = await db.Answer.findAll({
-        where: {
-          questionId
-        },
+      where: {
+        questionId
+      },
       include: [db.User],
       order: [['createdAt', 'DESC']]
     });
