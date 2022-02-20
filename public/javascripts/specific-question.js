@@ -9,6 +9,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     const hiddenForm = document.querySelector('.hidden-form')
     const cancelEditButton = document.querySelector('.cancel-edit-button')
 
+    const deleteAnswersForm = document.querySelector('.delete-answers-form')
+    const deleteAnswerButton = document.querySelector('.delete-answer-button')
+    const cancelAnswerDelete = document.querySelector('.cancel-button-2')
+    const deleteButton2 = document.querySelector('.delete-button-2')
+
+
+
     editButton.addEventListener('click', (e) => {
         e.preventDefault()
         titleTextArea.value = currentTitle.innerText
@@ -23,6 +30,16 @@ window.addEventListener('DOMContentLoaded', async () => {
         hiddenForm.classList = 'hidden-form'
         editButton.classList = 'edit-button'
         deleteButton.classList = 'delete-button'
+    })
+
+    deleteAnswerButton.addEventListener('click', (e) => {
+        console.log(`this button works`)
+        e.stopPropagation()
+        deleteAnswersForm.classList = ''
+    })
+
+    cancelAnswerDelete.addEventListener('click', (e) => {
+        deleteAnswersForm.classList = 'delete-answers-form'
     })
 
 })
