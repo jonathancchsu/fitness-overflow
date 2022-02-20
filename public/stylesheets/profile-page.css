@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 15px #3D405B;
+    border-bottom: 1px solid #3D405B;
 }
 
 .nav-display-left {
@@ -54,11 +55,34 @@ p {
     border: none;
     background-color: black;
     color: #F4F1DE;
+    margin-left: 10px;
+}
+
+.new-q-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 110px;
+    border: none;
+    background-color: #3D405B ;
+    color: #F4F1DE;
+    margin-left: 10px;
+}
+
+.all-qs-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 110px;
+    border: none;
+    background-color: #F2CC8F ;
+    color: black;
+    margin-left: 10px;
 }
 
 
 .logout-button:hover,
-.log-in-button:hover {
+.log-in-button:hover,
+.new-q-button:hover,
+.all-qs-button {
     cursor: pointer;
 }
 
@@ -75,6 +99,7 @@ p {
     margin-top: 25px;
     padding: 10px;
     box-shadow: inset 0px 0px 5px #3D405B, 0px 0px 20px #3D405B;
+    margin-bottom: 100px;
 }
 
 .your-questions {
@@ -119,8 +144,9 @@ p {
     height: 74px;
     width: 100%;
     background-color: #E07A5F;
-    position: relative;
+    position: fixed;
     bottom: 0;
+    box-shadow: 0px 0px 15px #3D405B;
 }
 
 .logo-img-lower {

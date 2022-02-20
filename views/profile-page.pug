@@ -11,10 +11,12 @@ block content
             a(href='/' class="fitness-font") Fitness-Overflow
         div.nav-display-right
             if locals.authenticated
-                form(action="/logout" method="post")
-                    button(type='submit' class='logout-button') Log-Out
                 form(action='/search' class='search-bar')
                     input(type='search' name='query' placeholder='Search' )
+                a(href=`/questions`): button(type='button' class='all-qs-button') All questions
+                a(href=`/questions/new`): button(type='button' class='new-q-button') Ask a question
+                form(action="/logout" method="post")
+                    button(type='submit' class='logout-button') Log-Out
             else
                 a(href='/' class='log-in-link'): button(type='button' class='log-in-button') Log-In
             img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
@@ -23,29 +25,32 @@ block content
             if res.locals.user.id === userId
                 .your-questions
                     div.title
-                        h2.your-post-title Your Questions:
+                        if questions.length
+                            h2.your-post-title Your Profile/Questions:
             else
                 .your-questions
                         div.title
-                            h2.your-post-title #{username}'s Questions:
-            .questions-block
-                if questions
-                    each question in questions
-                        .each-post-block
-                            div.post-user
-                                img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
-                                p.user-name= question.User.username
+                            h2.your-post-title #{username}'s Profile/Questions:
+            if questions.length
+                .questions-block
+                    if questions
+                        each question in questions
+                            .each-post-block
+                                div.post-user
+                                    img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class="profile-img-small")
+                                    p.user-name= question.User.username
 
-                            a(href=`/questions/${question.id}` class="post-link"): div.post-box
-                                h1.post-titles.post-link=question.title
-                                p.post-link=question.body
-                                div
-                                    p.time-link= questionDate(question.createdAt)
-                else
-                    p.no-questions has not created any questions yet...
+                                a(href=`/questions/${question.id}` class="post-link"): div.post-box
+                                    h1.post-titles.post-link=question.title
+                                    p.post-link=question.body
+                                    div
+                                        p.time-link= questionDate(question.createdAt)
+            else
+                h1.no-questions No questions asked yet...
+
 
 
     .footer
-            .logo-img-lower
-                a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
-                a(href='/' class="fitness-font") Fitness-Overflow
+        .logo-img-lower
+            a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
+            a(href='/' class="fitness-font") Fitness-Overflow

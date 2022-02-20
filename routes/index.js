@@ -1,17 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/models');
+const { User } = db
 const { loginUser } = require('../auth.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const { csrfProtection, asyncHandler } = require('./utils');
+const { csrfProtection, asyncHandler, getDate } = require('./utils');
 const { Sequelize } = require('../db/models');
 
 /* GET home page. */
-router.get('/', csrfProtection, function(req, res, next) {
-  console.log(res.locals.authenticated)
-  res.render('home.pug', { title: 'Fitness Overflow', req, res, csrfToken: req.csrfToken()});
-});
+router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
+    const isLoggedIn = res.locals.authenticated;
+    // console.log(`\n\n\n\n\n\n${isLoggedIn}\n\n\n\n\n\n\n`)
+    if (isLoggedIn) {
+        const userId = res.locals.user.id;
+        res.render('home.pug', {
+            title: 'Fitness Overflow',
+            req,
+            res,
+            userId,
+            csrfToken: req.csrfToken()
+        });
+    } else {
+        res.render('home.pug', {
+            title: 'Fitness Overflow',
+            req,
+            res,
+            csrfToken: req.csrfToken()
+        })
+    }
+}));
 
 const loginValidations = [
   check('email')
@@ -33,7 +51,6 @@ router.post('/',
 
     let errors = [];
     const validatorErrors = validationResult(req);
-
     if (validatorErrors.isEmpty()) {
         const user = await db.User.findOne({ where: { email } });
 
@@ -42,7 +59,7 @@ router.post('/',
 
             if (passwordMatch) {
                 loginUser(req, res, user);
-                return res.redirect('/questions');
+                return res.redirect(`/users/${user.id}`);
             }
         }
         errors.push('Cannot find a valid user with the provided email and passwords.');
@@ -64,6 +81,7 @@ router.get('/search', asyncHandler(async (req, res) => {
         return res.render('search', {title:'Nothing was entered in search bar.', questions: []})
     }
     const questions = await db.Question.findAll({
+        include: User,
         where: {
             [Sequelize.Op.or]: [
               {
@@ -81,7 +99,14 @@ router.get('/search', asyncHandler(async (req, res) => {
         order: [['updatedAt', 'DESC']],
     });
 
-    res.render('search', {title: `Results for "${query}"`, questions})
+    const questionDate = getDate;
+
+    res.render('search', {
+        title: `Results for "${query}"`,
+        User,
+        questions,
+        questionDate,
+    })
 }));
 
 module.exports = router;

@@ -14,35 +14,39 @@ block content
             if locals.authenticated
                 form(action='/search' class='search-bar')
                     input(type='search' name='query' placeholder='Search' )
+                a(href=`/questions`): button(type='button' class='all-qs-button') All questions
+                a(href=`/questions/new`): button(type='button' class='new-q-button') Ask a question
                 form(action="/logout" method="post")
                     button(type='submit' class='logout-button') Log-Out
             else
                 a(href='/' class='log-in-link'): button(type='button' class='log-in-button') Log-In
-            img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
+            a(href=`/users/${userId}`): img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img')
     .main-body
         .post-block
             .upper-question-block
                 .title-img-content
                     .username-and-img
-                        img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img-2')
+                        a(href=`/users/${question.User.id}`): img(src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' class='profile-img-2')
                         a(href=`/users/${question.User.id}` class='username')= question.User.username
                     h1.question-title= question.title
                     .date-block
                         p(class='date')= questionDate(question.createdAt)
                     .post-contents
                         p.question-body= question.body
-                        form(action=`/questions/edit/${question.id}` id='update-question-field' method='post' class="hidden-form")
-                            input(type='hidden' name ='_csrf' value=csrfToken)
-                            div#categories-drop-down Category:
-                                select#category(name="categoryId")
-                                    each category in categoryArr
-                                        option(value=category.id) #{category.name}
-                            div#title Title:
-                                textarea(name="title" for="title" value=question.title class="hidden-title-ta")
-                            div#body Question:
-                                textarea(name="body", for="body" value=question.body class='hidden-body-ta')
-                            button(type='submit' class='edit-question-button') Edit Question
-                            button(type='button' class='cancel-edit-button') Cancel Edit
+                        .hidden-form-body
+                            form(action=`/questions/edit/${question.id}` id='update-question-field' method='post' class="hidden-form")
+                                input(type='hidden' name ='_csrf' value=csrfToken)
+                                div#categories-drop-down Category:
+                                    select#category(name="categoryId")
+                                        each category in categoryArr
+                                            option(value=category.id class='option-tab') #{category.name}
+                                div#title Title:
+                                    textarea(name="title" for="title" value=question.title class="hidden-title-ta")
+                                div#body Question:
+                                    textarea(name="body", for="body" value=question.body class='hidden-body-ta')
+                                .question-edit-button-box
+                                    button(type='submit' class='edit-question-button') Submit Edit
+                                    button(type='button' class='cancel-edit-button') Cancel Edit
                 .lower-post-nav
                     .lower-post-nav-right
                         if (question.userId === userId)
@@ -59,7 +63,10 @@ block content
                     h2.please-log-in Please log in to answer this question...
 
                 .answers-title
-                    h2.answers-text Answers:
+                    if answers.length
+                        h2.answers-text Answers:
+                    else
+                        h2.answers-text No answers for this question yet, be the first!
 
 
             each answer in answers

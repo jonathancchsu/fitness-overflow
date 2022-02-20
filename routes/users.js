@@ -23,7 +23,6 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   });
   const usern = await db.User.findByPk(userId)
   const username = usern.username
-  console.log(res.locals.user.id)
   res.render('profile-page', {
     res,
     user,

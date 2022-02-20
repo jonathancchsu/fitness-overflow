@@ -8,6 +8,8 @@ p {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 15px #3D405B;
+    z-index: 1;
+    border-bottom: 1px solid #3D405B;
 }
 
 .nav-display-left {
@@ -53,8 +55,7 @@ p {
     cursor: pointer;
 }
 
-.logout-button,
-.login-button{
+.logout-button {
     border-radius: 10px;
     height: 25px;
     width: 70px;
@@ -69,21 +70,21 @@ p {
     height: 25px;
     width: 110px;
     border: none;
-    background-color: #3D405B ;
+    background-color: #3D405B;
     color: #F4F1DE;
     margin-left: 10px;
 }
 
-
-
-.demo-button {
+.all-qs-button {
     border-radius: 10px;
     height: 25px;
-    width: 70px;
+    width: 110px;
     border: none;
-    background-color: black;
-    color: #F4F1DE;
+    background-color: #F2CC8F ;
+    color: black;
+    margin-left: 10px;
 }
+
 .signup-button {
     border-radius: 10px;
     height: 25px;
@@ -96,17 +97,32 @@ p {
 
 
 .logout-button:hover,
-.log-in-button:hover,
+.login-button:hover,
 .new-q-button:hover,
-.signup-button:hover {
+.signup-button:hover,
+.all-questions-button:hover,
+.demo-button:hover,
+.all-qs-button:hover {
     cursor: pointer;
 }
 
 .login-block {
     display: flex;
     height: 50vh;
-    /* display: table-row; */ 
+    /* display: table-row; */
     width: 50vh;
+}
+
+.login-button,
+.demo-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 70px;
+    border: none;
+    background-color: black;
+    color: #F4F1DE;
+    margin: 10px;
+
 }
 
 .home-wrapper {
@@ -115,23 +131,59 @@ p {
     align-items: center;
 }
 
-.bkg-img { 
-   height: 100vh;
-   float: left;
-   object-fit: cover;
-   width: 50%;
-   border-radius: 5px;
-   box-shadow: 0px 0px 25px #3D405B;
+.content {
+   /* height: 100vh; */
+   /* float: left;
+   object-fit: cover; */
+   /* width: 50%; */
+   background-image: url('https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/blog_posts/webmd-doctors/1800x1200_empty-gym.jpg');
+   width: 100%;
+   height: 1000px;
+   background-position: center;
+   background-size: cover;
+   z-index: 0;
+
 }
+
+.bkg-text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 15px black;
+    width: 300px;
+    height: 200px;
+    background-color: #E07A5F;
+    border-radius: 25px;
+    position: absolute;
+    top: 30%;
+    left: 25%
+
+}
+
 .bkg-text {
     display: flex;
+    margin: 15px;
+    justify-content: center;
     align-items: center;
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     size: 20px;
     color: #F4F1DE;
+}
+
+
+.all-q-button-block {
+    margin-top: 10px;
+    position: relative;
+}
+
+.all-questions-button {
+    border-radius: 10px;
+    height: 25px;
+    width: 140px;
+    border: none;
+    background-color: #F2CC8F;
+    color: black;
 }
 
 .login-container {
@@ -140,11 +192,14 @@ p {
     justify-content: center;
     margin-top: 0px;
     padding: 20px;
-    border: 1px solid #3D405B;
-    border-radius: 15px;
-    box-shadow: 0px 0px 25px #3D405B;
-    height: 50vh;
-    width: 50%
+    box-shadow: 0px 0px 15px black;
+    width: 300px;
+    height: 200px;
+    background-color: #E07A5F;
+    border-radius: 25px;
+    position: absolute;
+    top: 30%;
+    right: 25%
 }
 
 .inner-container {
@@ -186,4 +241,22 @@ p {
     width: 100%;
     display: flex;
     flex-direction: row;
+}
+
+
+.footer {
+    border-top: 1px solid #3D405B;
+    margin-top: 30px;
+    height: 74px;
+    width: 100%;
+    background-color: #E07A5F;
+    position: absolute;
+    bottom: 0;
+    box-shadow: 0px 0px 15px black;
+}
+
+.logo-img-lower {
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
 }
