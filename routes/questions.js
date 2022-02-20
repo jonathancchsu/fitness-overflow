@@ -57,7 +57,7 @@ router.get(
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    // const userId = res.locals.user.id;
+    const userId = res.locals.user.id;
     const questionDate = getDate;
     const questions = await db.Question.findAll({
       include: [db.User],
@@ -69,7 +69,8 @@ router.get(
     // console.log(questions)
     res.render('all-questions', {
       questions,
-      questionDate
+      questionDate,
+      userId
     })
   })
 )
@@ -79,10 +80,15 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res) => {
     const categories = await db.Category.findAll();
+    const userId = res.locals.user.id
     let categoryArr = [];
     categories.forEach( el =>  categoryArr.push(el))
 
-    res.render('new-question', { csrfToken: req.csrfToken(), categoryArr});
+    res.render('new-question', {
+      userId,
+      categoryArr,
+      csrfToken: req.csrfToken(),
+    });
   }
 ))
 
@@ -108,6 +114,7 @@ router.post(
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('new-question', {
         title: 'New Question',
+        userId,
         title,
         body,
         categoryId,
@@ -161,7 +168,16 @@ router.get('/:id/delete', csrfProtection, asyncHandler(async (req, res) => {
   const question = await db.Question.findByPk(questionId, {
     include: db.User
   });
+  const answers = await db.Answer.findAll({
+    where: {
+      questionId
+    },
+    include: [db.User],
+    order: [['createdAt', 'DESC']]
+  });
+
   res.render('specific-question-delete', {
+    answers,
     userId,
     question,
     questionDate,
