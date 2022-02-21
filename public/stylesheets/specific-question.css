@@ -77,7 +77,10 @@ p {
 .cancel-button:hover,
 .edit-question-button:hover,
 .cancel-edit-button:hover,
-.all-qs-button:hover {
+.all-qs-button:hover,
+.edit-answer-button:hover,
+.delete-answer-button:hover,
+.cancel-answer-edit-button:hover {
     cursor: pointer;
 }
 
@@ -148,7 +151,8 @@ h1 {
 }
 
 .delete-button,
-.cancel-edit-button {
+.cancel-edit-button,
+.cancel-answer-edit-button {
     border-radius: 25px;
     margin-left: 10px;
     margin-bottom: 20px;
@@ -160,7 +164,8 @@ h1 {
 }
 
 .edit-question-button,
-.cancel-edit-button {
+.cancel-edit-button
+ {
     margin-top: 15px;
     width: 85px;
 }
@@ -195,21 +200,29 @@ h1 {
     margin-bottom: 100px;
 }
 
-.answer-text-area {
-    margin-top: 30px;
-    min-width: 100%;
+.answer-text-body {
+    margin-top: 10px;
+    width: 100%;
     min-height: 80px;
 }
 
-.answer-submit-button {
+.answer-submit-button,
+.submit-answer-button {
     cursor: pointer;
     border-radius: 25px;
     margin-bottom: 20px;
+    margin-top: 10px;
     height: 25px;
     width: 70px;
     border: none;
     background-color: #F2CC8F;
     color: black;
+}
+
+.submit-answer-button,
+.cancel-answer-edit-button {
+    width: 100px;
+    margin-top: 10px;
 }
 
 .answer-contents {
@@ -345,4 +358,9 @@ h1 {
 
 .hidden-answer-edit-form {
     display: none;
+}
+
+.question-edit-button-block {
+    display: flex;
+    justify-content: space-evenly;
 }

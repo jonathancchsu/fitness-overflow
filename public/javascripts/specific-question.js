@@ -21,15 +21,17 @@ window.addEventListener('DOMContentLoaded', async () => {
     const answerBodyTextAreas = document.querySelectorAll('[id^="ta2"]')
     const hiddenAnswerForms = document.querySelectorAll('[id^="haf"]')
     const cancelAnswerEditButtons = document.querySelectorAll('[id^="cancel"]')
-    const answerDeleteButtons = document.querySelectorAll('[id^="delete"]')
+    const answerDeleteButtons = document.querySelectorAll('[id^="delete3"]')
     console.log(answerDeleteButtons)
 
     editAnswerButtons.forEach(editAnswerButton => {
         editAnswerButton.addEventListener('click', (e) => {
 
+            const answerBodyText = document.getElementById(`cur-ta`)
+
             editAnswerButton.classList = 'hidden-answer-edit-form'
 
-            const answerDeleteButton = document.getElementById(`delete-${e.target.value}`)
+            const answerDeleteButton = document.getElementById(`delete3-${e.target.value}`)
             answerDeleteButton.classList = 'hidden-answer-edit-form'
 
             const hiddenAnswerForm = document.getElementById(`update-answer-field haf-${e.target.value}`)
@@ -45,6 +47,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
             const answerBodyTextArea = document.getElementById(`ta2-${e.target.value}`)
             const currentAnswerBody = document.getElementById(`cur-ta-${e.target.value}`)
+            currentAnswerBody.classList = 'hidden-answer-edit-form'
             answerBodyTextArea.value = currentAnswerBody.innerText
         })
     })
@@ -69,6 +72,16 @@ window.addEventListener('DOMContentLoaded', async () => {
         hiddenForm.classList = 'hidden-form'
         editButton.classList = 'edit-button'
         deleteButton.classList = 'delete-button'
+    })
+
+
+    const deleteButton3 = document.querySelectorAll('[id^="delete3"]')
+
+    deleteButton3.forEach(deleteButton3one => {
+        deleteButton3one.addEventListener('click', (e) => {
+            const form = document.getElementById('haf-form')
+            form.action = `/questions/answers/${e.target.value}/delete`
+        })
     })
 
 

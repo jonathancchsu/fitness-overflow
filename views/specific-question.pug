@@ -61,7 +61,7 @@ block content
                     .answer-form-box
                     form(action=`/questions/${question.id}/answers/new` id='new-answer-form-field' method='post')
                         input(type='hidden' name ='_csrf' value=csrfToken)
-                        div#body Answer:
+                        div#body Submit your own answer here:
                             textarea(name="body" for="body" value=answers.body placeholder="Answer this question:" class='answer-text-body')
                         .button-block
                             button(type='submit' class="answer-submit-button") Submit
@@ -86,31 +86,39 @@ block content
                             p(class='date')= questionDate(answer.createdAt)
                         .answer-contents
                             p(class='answer-body' id=`cur-ta-${answer.id}`)= answer.body
+                            .hidden-answer-form-body
+                                form(action=`/questions/answers/${answer.id}/edit` method='post' class=`hidden-answer-edit-form` id=`update-answer-field haf-${answer.id}`)
+                                    input(type='hidden' name ='_csrf' value=csrfToken)
+                                    div#body Answer:
+                                        textarea(name="body" for="body" value= answer.body class='hidden-answer-body-ta' id=`ta2-${answer.id}`)
+                                    .question-edit-button-box
+                                        button(type='submit' class='submit-answer-button' id=`submit-edit${answer.id}`) Submit Edit
+                                        button(type='button' class='cancel-answer-edit-button' id=`cancel-${answer.id}`) Cancel Edit
                             .edit-delete-votes-block
                                 .votes-block
                                     p.votes-counter votes: #{answer.votes}
                                 .edit-delete-block
                                     if (answer.userId === userId)
                                         button(type='button' class='edit-answer-button' value=`${answer.id}` id=`edit-${answer.id}`) Edit
-                                        button(type='button' class='delete-answer-button' id=`delete-${answer.id}`) Delete
+                                        button(type='button' class='delete-answer-button' value=`${answer.id}` id=`delete3-${answer.id}`) Delete
 
-                                    .delete-answers-form
-                                        .form-box
-                                            p.question Delete this answer?
-                                            form(action=`/questions/answers/delete/${answer.id}` method='post' class='hidden-answer-form')
-                                                input(type='hidden' name='_csrf' value=csrfToken)
-                                                .buttons-section
-                                                    button(type='button' class='cancel-button-2') Cancel
-                                                    button(type='submit' class='delete-button-2') Delete
+                            .delete-answers-form
+                                .form-box
+                                    p.question Delete this answer?
+                                    form(action=`/questions/answers/${answer.id}/delete` method='post' class='hidden-answer-form' id='haf-form')
+                                        input(type='hidden' name='_csrf' value=csrfToken)
+                                        .buttons-section
+                                            button(type='button' class='cancel-button-2') Cancel
+                                            button(type='submit' class='delete-button-2') Delete
 
-                                    .hidden-answer-form-body
-                                        form(action=`/questions/answers/${answer.id}/edit` method='post' class=`hidden-answer-edit-form` id=`update-answer-field haf-${answer.id}`)
-                                            input(type='hidden' name ='_csrf' value=csrfToken)
-                                            div#body Answer:
-                                                textarea(name="body" for="body" value= answer.body class='hidden-answer-body-ta' id=`ta2-${answer.id}`)
-                                            .question-edit-button-box
-                                                button(type='submit' class='submit-answer-button' id=`submit-edit${answer.id}`) Submit Edit
-                                                button(type='button' class='cancel-answer-edit-button' id=`cancel-${answer.id}`) Cancel Edit
+                            .hidden-answer-form-body
+                                form(action=`/questions/answers/${answer.id}/edit` method='post' class=`hidden-answer-edit-form` id=`update-answer-field haf-${answer.id}`)
+                                    input(type='hidden' name ='_csrf' value=csrfToken)
+                                    div#body Answer:
+                                        textarea(name="body" for="body" value= answer.body class='hidden-answer-body-ta' id=`ta2-${answer.id}`)
+                                    .question-edit-button-box
+                                        button(type='submit' class='submit-answer-button' id=`submit-edit${answer.id}`) Submit Edit
+                                        button(type='button' class='cancel-answer-edit-button' id=`cancel-${answer.id}`) Cancel Edit
 
         .footer
             .logo-img-lower
