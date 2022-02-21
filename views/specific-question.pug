@@ -52,6 +52,8 @@ block content
                         if (question.userId === userId)
                             button(class='edit-button'): a(href=`/questions/${question.id}/edit` class='edit-text') Edit
                             button(class='delete-button'): a(href=`/questions/${question.id}/delete` class='edit-text') Delete
+
+
         .answer-block
 
             .submit-answer-block
@@ -83,14 +85,14 @@ block content
                         .date-block
                             p(class='date')= questionDate(answer.createdAt)
                         .answer-contents
-                            p.answer-body= answer.body
+                            p(class='answer-body' id=`cur-ta-${answer.id}`)= answer.body
                             .edit-delete-votes-block
                                 .votes-block
                                     p.votes-counter votes: #{answer.votes}
                                 .edit-delete-block
                                     if (answer.userId === userId)
-                                        button(type='button' class='edit-answer-button' value=answer.id): a(href=`/questions/answers/${answer.id}/edit` class='edit-answer-text') Edit
-                                        button(type='button' class='delete-answer-button' value=answer.id) Delete
+                                        button(type='button' class='edit-answer-button' value=`${answer.id}` id=`edit-${answer.id}`) Edit
+                                        button(type='button' class='delete-answer-button' id=`delete-${answer.id}`) Delete
 
                                     .delete-answers-form
                                         .form-box
@@ -98,8 +100,17 @@ block content
                                             form(action=`/questions/answers/delete/${answer.id}` method='post' class='hidden-answer-form')
                                                 input(type='hidden' name='_csrf' value=csrfToken)
                                                 .buttons-section
-                                                    button(type='button' class='cancel-button-2' value=answer.id) Cancel
-                                                    button(type='submit' class='delete-button-2' value=answer.id) Delete
+                                                    button(type='button' class='cancel-button-2') Cancel
+                                                    button(type='submit' class='delete-button-2') Delete
+
+                                    .hidden-answer-form-body
+                                        form(action=`/questions/answers/${answer.id}/edit` method='post' class=`hidden-answer-edit-form` id=`update-answer-field haf-${answer.id}`)
+                                            input(type='hidden' name ='_csrf' value=csrfToken)
+                                            div#body Answer:
+                                                textarea(name="body" for="body" value= answer.body class='hidden-answer-body-ta' id=`ta2-${answer.id}`)
+                                            .question-edit-button-box
+                                                button(type='submit' class='submit-answer-button' id=`submit-edit${answer.id}`) Submit Edit
+                                                button(type='button' class='cancel-answer-edit-button' id=`cancel-${answer.id}`) Cancel Edit
 
         .footer
             .logo-img-lower

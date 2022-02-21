@@ -342,3 +342,7 @@ h1 {
 .delete-answers-form {
     display: none;
 }
+
+.hidden-answer-edit-form {
+    display: none;
+}

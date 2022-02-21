@@ -142,11 +142,16 @@ router.post(
 );
 
 
-router.get('/answers/:id/edit',
+router.post('/answers/:id/edit',
   csrfProtection,
   asyncHandler(async (req, res) => {
     const answerId = req.params.id;
-    console.log(`\n\n\n\n\n ${answerId} \n\n\n\n\n`)
+    const answer = await Answer.findByPk(answerId)
+    const { body } = req.body
+
+    answer.body = body
+    await answer.save()
+    res.redirect(`/questions/${answer.questionId}`)
 
   }))
 
@@ -284,30 +289,6 @@ router.post('/edit/:id', csrfProtection, asyncHandler(async (req, res) => {
   }
 }));
 
-
-// router.delete(
-//   "/:id",
-//   asyncHandler(async (req, res, next) => {
-//     const question = await Question.findOne({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-//     if (req.user.id !== question.userId) {
-//       const err = new Error("Unauthorized");
-//       err.status = 401;
-//       err.message = "You do not have the right to edit this question.";
-//       err.title = "Unauthorized";
-//       throw err;
-//     }
-//     if (question) {
-//       await question.destroy();
-//       res.json({ message: `Deleted question with id of ${req.params.id}.` });
-//     } else {
-//       next(questionNotFoundError(req.params.id));
-//     }
-//   })
-// );
 
 
 
