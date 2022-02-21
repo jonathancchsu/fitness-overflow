@@ -39,7 +39,7 @@ Fitness-Overflow is a clone off of [Stack Overflow](https://stackoverflow.com/).
 | column name   | data type |  details         |
 |-------------  |-----------|------------------|
 | id            | integer   | not null, PK     |
-| categoryname | string(50)| not null, unique |
+| name          | string(50)| not null, unique |
 | createdAt     | datetime  | not null         |
 | updatedAt     | datetime  | not null         |
 
@@ -106,14 +106,4 @@ This page displays individual questions with associated answers and votes, as we
   * `DELETE api/answers/:id`
   * `PUT api/answers/:id/votes`
 
-## API-Routes
-### Answers
-* Anyone can view answers on their respective question page and see it's body and vote counters.
-  * `GET /api/questions/:id/answers`
-  * `GET /api/answers/:id`
-* A logged in user may create an answer and seeing it populate directly on the questions page without causing a refresh/redirect.
-  * `POST /api/questions/:id/answers`
-* A logged in user may edit an answer and see it change directly on the questions page without causing a refresh/redirect.
-  * `PUT /api/answers/:id`
-* A logged in user may delete an answer and see it be removed directly on the questions page without causing a refresh/redirect.
-  * `DELETE /api/answers/:id`
+
