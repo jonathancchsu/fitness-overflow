@@ -129,24 +129,27 @@ router.post('/:id/answers/new',
   }))
 
 
-router.get(
-  "/:id/answers/delete/:id",
+router.post(
+  "/answers/delete/:id",
   asyncHandler(async (req, res) => {
-    console.log(`\n\n\n\n\n ${req.params.id} \n\n\n\n\n`)
-    console.log(req.params)
-    const questionId = answers.questionId
-    const answers = await db.Answer.findAll({
-      where: { questionId }
-    })
-    answers.forEach(async (answer) => {
-      await answer.destroy()
-    })
-
-
-    res.redirect(`/users`)
+    const answerId = req.params.id
+    const answer = await db.Answer.findByPk(answerId)
+    const questionId = answer.questionId
+    await answer.destroy()
+    res.redirect(`/questions/${questionId}`)
   }
   )
 );
+
+
+router.get('/answers/:id/edit',
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const answerId = req.params.id;
+    console.log(`\n\n\n\n\n ${answerId} \n\n\n\n\n`)
+
+  }))
+
 
 router.post(
   "/new",
@@ -204,6 +207,7 @@ router.get(
     if (question) {
       res.render('specific-question', {
         user: req.session.auth.userId,
+        userId,
         categoryArr,
         answers,
         question,

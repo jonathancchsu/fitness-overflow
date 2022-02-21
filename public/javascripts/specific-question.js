@@ -10,20 +10,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     const cancelEditButton = document.querySelector('.cancel-edit-button')
 
     const deleteAnswersForm = document.querySelector('.delete-answers-form')
-    const deleteAnswerButton = document.querySelector('.delete-answer-button')
-    const cancelAnswerDelete = document.querySelector('.cancel-button-2')
+    const deleteAnswerButton = document.querySelectorAll('.delete-answer-button')
+    const cancelAnswerDelete = document.querySelectorAll('.cancel-button-2')
     const deleteButton2 = document.querySelector('.delete-button-2')
 
 
-
-    editButton.addEventListener('click', (e) => {
-        e.preventDefault()
-        titleTextArea.value = currentTitle.innerText
-        bodyTextArea.value = currentBody.innerText
-        hiddenForm.classList = ''
-        editButton.classList = 'hidden-form'
-        deleteButton.classList = 'hidden-form'
-    })
+    if (editButton) {
+        editButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            titleTextArea.value = currentTitle.innerText
+            bodyTextArea.value = currentBody.innerText
+            hiddenForm.classList = ''
+            editButton.classList = 'hidden-form'
+            deleteButton.classList = 'hidden-form'
+        })
+    }
 
     cancelEditButton.addEventListener('click', (e) => {
         e.preventDefault()
@@ -32,14 +33,18 @@ window.addEventListener('DOMContentLoaded', async () => {
         deleteButton.classList = 'delete-button'
     })
 
-    deleteAnswerButton.addEventListener('click', (e) => {
-        console.log(`this button works`)
-        e.stopPropagation()
-        deleteAnswersForm.classList = ''
-    })
+    for (let deleteButton of deleteAnswerButton) {
+        deleteButton.addEventListener('click', (e) => {
+            console.log(`this button works`)
+            deleteAnswersForm.classList = ''
+        })
+    }
 
-    cancelAnswerDelete.addEventListener('click', (e) => {
-        deleteAnswersForm.classList = 'delete-answers-form'
-    })
+    for (let cancelButton of cancelAnswerDelete) {
+        cancelButton.addEventListener('click', (e) => {
+            deleteAnswersForm.classList = 'delete-answers-form'
+        })
+    }
+
 
 })
