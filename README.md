@@ -104,6 +104,6 @@ This page displays individual questions with associated answers and votes, as we
   * `POST api/questions/:id/answers`
   * `PUT api/answers/:id`
   * `DELETE api/answers/:id`
-  * `PUT api/answers/:id/votes`
+  * `PUT api/answers/:id/categories`
 
 
