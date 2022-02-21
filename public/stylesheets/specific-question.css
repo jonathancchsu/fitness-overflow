@@ -80,7 +80,9 @@ p {
 .all-qs-button:hover,
 .edit-answer-button:hover,
 .delete-answer-button:hover,
-.cancel-answer-edit-button:hover {
+.cancel-answer-edit-button:hover,
+.cancel-button-2:hover,
+.delete-button-2:hover {
     cursor: pointer;
 }
 

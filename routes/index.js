@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const { csrfProtection, asyncHandler, getDate } = require('./utils');
 const { Sequelize } = require('../db/models');
 
+
 /* GET home page. */
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     const isLoggedIn = res.locals.authenticated;
