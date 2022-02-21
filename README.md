@@ -66,10 +66,10 @@ Fitness-Overflow is a clone off of [Stack Overflow](https://stackoverflow.com/).
 | updatedAt   | datetime  | not null               |
 
 ## Front-end Routes
-### `/login`
+### `/`
 This page displays a log in form
-  * `GET /login`
-  * `POST /login`
+  * `GET /`
+  * `POST /`
 
 ### `/signup`
 This page displays a signup form.
