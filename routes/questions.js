@@ -130,9 +130,10 @@ router.post('/:id/answers/new',
 
 
 router.post(
-  "/answers/delete/:id",
+  "/answers/:id/delete",
   asyncHandler(async (req, res) => {
     const answerId = req.params.id
+    console.log(`\n\n\n\n\n ${answerId} \n\n\n\n\n`)
     const answer = await db.Answer.findByPk(answerId)
     const questionId = answer.questionId
     await answer.destroy()
