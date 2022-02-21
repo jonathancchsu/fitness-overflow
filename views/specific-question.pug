@@ -88,21 +88,20 @@ block content
                                 .votes-block
                                     p.votes-counter votes: #{answer.votes}
                                 .edit-delete-block
-                                    if (question.userId === userId)
-                                        button(type='button' class='edit-answer-button'): a(href=`/answers/${answer.id}/edit` class='edit-answer-text') Edit
-                                        button(type='button' class='delete-answer-button') Delete
+                                    if (answer.userId === userId)
+                                        button(type='button' class='edit-answer-button' value=answer.id): a(href=`/questions/answers/${answer.id}/edit` class='edit-answer-text') Edit
+                                        button(type='button' class='delete-answer-button' value=answer.id) Delete
+
+                                    .delete-answers-form
+                                        .form-box
+                                            p.question Delete this answer?
+                                            form(action=`/questions/answers/delete/${answer.id}` method='post' class='hidden-answer-form')
+                                                input(type='hidden' name='_csrf' value=csrfToken)
+                                                .buttons-section
+                                                    button(type='button' class='cancel-button-2' value=answer.id) Cancel
+                                                    button(type='submit' class='delete-button-2' value=answer.id) Delete
 
         .footer
             .logo-img-lower
                 a(href='/'): img(src='https://www.vectorkhazana.com/assets/images/products/Dumbbell_Svg.png' class='dumbbell-img')
                 a(href='/' class="fitness-font") Fitness-Overflow
-
-        each answer in answers
-            .delete-answers-form
-                .form-box
-                    p.question Delete this answer?
-                    form(action=`/questions/${question.id}/answers/delete/${answer.id}` method='get' class='hidden-answer-form')
-                        input(type='hidden' name='_csrf' value=csrfToken)
-                        .buttons-section
-                            button(type='button' class='cancel-button-2') Cancel
-                            button(type='submit' class='delete-button-2') Delete
